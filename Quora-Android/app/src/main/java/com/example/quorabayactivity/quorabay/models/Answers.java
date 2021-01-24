@@ -16,8 +16,31 @@ public class Answers {
     @SerializedName("answerText")
     private String answerText;
 
+    @SerializedName("date")
+    private String date;
+
     @SerializedName("isAccepted")
     private boolean isAccepted;
+
+    public Answers() {
+    }
+
+    public Answers(String answerId, String questionId, String userId, String answerText, String date, boolean isAccepted) {
+        this.answerId = answerId;
+        this.questionId = questionId;
+        this.userId = userId;
+        this.answerText = answerText;
+        this.date = date;
+        this.isAccepted = isAccepted;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getAnswerId() {
         return answerId;
@@ -66,6 +89,7 @@ public class Answers {
                 ", questionId='" + questionId + '\'' +
                 ", userId='" + userId + '\'' +
                 ", answerText='" + answerText + '\'' +
+                ", date='" + date + '\'' +
                 ", isAccepted=" + isAccepted +
                 '}';
     }

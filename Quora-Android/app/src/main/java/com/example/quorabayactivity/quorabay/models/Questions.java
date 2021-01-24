@@ -22,6 +22,18 @@ public class Questions {
     @SerializedName("corporateId")
     private  String corporateId;
 
+    public Questions() {
+    }
+
+    public Questions(String questionId, String userId, String questionText, String date, String categoryId, String corporateId) {
+        this.questionId = questionId;
+        this.userId = userId;
+        this.questionText = questionText;
+        this.date = date;
+        this.categoryId = categoryId;
+        this.corporateId = corporateId;
+    }
+
     public String getQuestionId() {
         return questionId;
     }

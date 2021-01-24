@@ -3,6 +3,7 @@ package com.example.quorabayactivity.quorabay;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.quorabayactivity.R;
+import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
+import com.example.quorabayactivity.quorabay.models.Questions;
+import com.example.quorabayactivity.quorabay.networks.IPostAPI;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class QuorabayPostQuestionActivity extends AppCompatActivity {
 
@@ -25,7 +35,6 @@ public class QuorabayPostQuestionActivity extends AppCompatActivity {
     private String askedByName = "";
     private ProgressDialog loader;
     private String myUrl="";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +47,9 @@ public class QuorabayPostQuestionActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.btn_quorabay_postquestion_cancel);
         postQuestionButton = findViewById(R.id.btn_quorabay_postquestion_postQuestion);
         loader = new ProgressDialog(this);
+
+        Retrofit retrofit = RetrofitBuilder.getInstance();
+        IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.topics));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -61,8 +73,44 @@ public class QuorabayPostQuestionActivity extends AppCompatActivity {
             //finish();
         });
 
+
         postQuestionButton.setOnClickListener(v -> {
-            performValidations();
+//            if (getQuestionText().isEmpty()) {
+//                questionBox.setError("Question Required!");
+//            }
+//            else if ((getTopic().equals("select topic"))) {
+//                Toast.makeText(this, "Select one Field", Toast.LENGTH_SHORT).show();
+//            }
+//            else if (!getQuestionText().isEmpty() && !getTopic().equals("")) {
+//                Toast.makeText(this, "Enter required fields", Toast.LENGTH_SHORT).show();
+//            }
+//            else{
+
+                EditText editText = findViewById(R.id.et_quorabay_postquestion_askQuestion);
+                Questions questions = new Questions();
+                questions.setCategoryId("c2");
+                questions.setCorporateId("c1");
+                questions.setUserId("u3");
+                questions.setQuestionText(editText.getText().toString());
+
+                Call<ResponseBody> responseBodyCall = iPostAPI.createQuestion(questions);
+
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Toast.makeText(QuorabayPostQuestionActivity.this , "Question Successfully Added", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(QuorabayPostQuestionActivity.this,QuorabayHomeActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(QuorabayPostQuestionActivity.this, "Failed" + t, Toast.LENGTH_LONG).show();
+                        Log.d("Manan" , "T");
+                    }
+                });
+//            }
+
         });
 
     }
@@ -76,17 +124,6 @@ public class QuorabayPostQuestionActivity extends AppCompatActivity {
         return spinner.getSelectedItem().toString();
     }
 
-    private void performValidations() {
-        if (getQuestionText().isEmpty()) {
-            questionBox.setError("Question Required!");
-        }
-        else if ((getTopic().equals("select topic"))) {
-            Toast.makeText(this, "Select one Field", Toast.LENGTH_SHORT).show();
-        }
-        else if (!getQuestionText().isEmpty() && !getTopic().equals("")) {
-            Toast.makeText(this, "Enter required fields", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void startLoader() {
         loader.setMessage("Posting your question");

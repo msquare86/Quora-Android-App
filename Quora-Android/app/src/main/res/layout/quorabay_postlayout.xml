@@ -5,6 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="10dp"
     android:elevation="10dp"
+    android:background="@color/quorabay_light"
+    android:backgroundTint="@color/quorabay_light"
     android:layout_margin="10dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,24 +77,11 @@
             android:layout_height="fill_parent"
             android:orientation="horizontal"
             android:layout_marginTop="10dp">
-
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/iv_quorabay_post_like"
-                android:src="@drawable/ic_quorabay_upvote"/>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/iv_quorabay_post_dislike"
-                android:src="@drawable/ic_quorabay_downvote"/>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/iv_quorabay_post_comment"
+                android:id="@+id/iv_quorabay_answer_answer"
                 android:src="@drawable/ic_baseline_comment_24"/>
         </LinearLayout>
         <LinearLayout
@@ -102,29 +91,13 @@
             android:layout_marginTop="10dp">
 
             <TextView
-                android:id="@+id/tv_quorabay_post_likes"
+                android:id="@+id/tv_quorabay_answer_answers"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="likes"
                 android:textAlignment="center"
+                android:text="View All Answers"
                 android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/tv_quorabay_post_dislikes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="dislikes"
-                android:textAlignment="center"
-                android:textColor="#000" />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="view all comments"
-                android:textColor="#000"
-                android:id="@+id/tv_quorabay_post_comments"/>
         </LinearLayout>
 
     </LinearLayout>

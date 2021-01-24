@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name = "quorabay_light">#006499</color>
+    <color name="quorabay_dark">#1b3752</color>
+    <color name="quorabay_text_color">#b0cae5</color>
 </resources>

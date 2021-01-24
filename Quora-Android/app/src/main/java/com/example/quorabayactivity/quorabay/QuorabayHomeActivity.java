@@ -1,12 +1,12 @@
 package com.example.quorabayactivity.quorabay;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -39,7 +39,7 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
     private Toolbar toolbar;
     private FloatingActionButton floatingActionButton;
     private SearchView searchView;
-    private ImageView logoutButton;
+    private ClipData.Item logoutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,13 +75,13 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
             }
         });
 
-        logoutButton = findViewById(R.id.quorbay_nav_logout);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: Go to Logout Page
-            }
-        });
+//        logoutButton = findViewById(R.id.quorabay_nav_logout);
+//        logoutButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //TODO: Go to Login Page
+//            }
+//        });
         List<Questions> questionsList = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.quorabay_recycler_view);
 

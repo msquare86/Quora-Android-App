@@ -45,7 +45,7 @@ public class QuorabaySearchRecylerViewAdapter extends RecyclerView.Adapter<Quora
 
     @Override
     public int getItemCount() {
-        return userSearchList.size();
+        return 1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

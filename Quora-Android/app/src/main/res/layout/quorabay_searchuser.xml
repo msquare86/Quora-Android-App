@@ -7,6 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
+    android:background="@color/quorabay_dark"
+    android:backgroundTint="@color/quorabay_light"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp">
@@ -38,6 +40,7 @@
             android:hint="UserName"
             android:fontFamily="sans-serif"
             android:textStyle="bold"
+            android:textColor="@color/quorabay_text_color"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="175dp"
             tools:layout_editor_absoluteY="41dp" />

@@ -16,6 +16,25 @@ public class Comments {
     @SerializedName("commentText")
     private String commentText;
 
+    @SerializedName("date")
+    private String date;
+
+    public Comments(String commentId, String answerId, String userId, String commentText, String date) {
+        this.commentId = commentId;
+        this.answerId = answerId;
+        this.userId = userId;
+        this.commentText = commentText;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getCommentId() {
         return commentId;
     }
@@ -55,6 +74,7 @@ public class Comments {
                 ", answerId='" + answerId + '\'' +
                 ", userId='" + userId + '\'' +
                 ", commentText='" + commentText + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 }

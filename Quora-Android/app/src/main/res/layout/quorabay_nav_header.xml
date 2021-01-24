@@ -8,7 +8,7 @@
     android:paddingRight="20dp"
     android:paddingLeft="20dp"
     android:paddingTop="5dp"
-    android:background="#881d16">
+    android:background="@color/quorabay_dark">
 
     <TextView
         android:layout_width="wrap_content"
@@ -16,7 +16,7 @@
         android:text="Quora"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:textColor="#fff"/>
+        android:textColor="@color/quorabay_text_color"/>
 
     <ImageView
         android:id="@+id/iv_quorabay_profile_image"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Username"
-        android:textColor="#fff"
+        android:textColor="@color/quorabay_text_color"
         android:textSize="18sp"/>
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Username@gmail.com"
-        android:textColor="#fff"
+        android:textColor="@color/quorabay_text_color"
         android:textSize="18sp"/>
 
 </LinearLayout>

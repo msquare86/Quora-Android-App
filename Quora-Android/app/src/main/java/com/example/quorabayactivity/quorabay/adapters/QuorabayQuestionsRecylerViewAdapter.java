@@ -1,6 +1,7 @@
 package com.example.quorabayactivity.quorabay.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quorabayactivity.R;
+import com.example.quorabayactivity.quorabay.QuorabayAnswerActivity;
 import com.example.quorabayactivity.quorabay.models.Questions;
 
 import java.util.List;
@@ -39,6 +41,26 @@ public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<Qu
         holder.tv_quorabay_post_asked_on.setText(questions.getDate());
         holder.tv_quorabay_post_asked.setText(questions.getUserId());
         holder.tv_quorabay_post_topic.setText(questions.getCategoryId());
+
+        holder.answer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoAnswerPage = new Intent(mContext , QuorabayAnswerActivity.class);
+                gotoAnswerPage.putExtra("QuestionId" , questions.getQuestionId());
+                gotoAnswerPage.putExtra("QuestionText" , questions.getQuestionText());
+                mContext.startActivity(gotoAnswerPage);
+            }
+        });
+
+        holder.answers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoAnswerPage = new Intent(mContext , QuorabayAnswerActivity.class);
+                gotoAnswerPage.putExtra("QuestionId" , questions.getQuestionId());
+                gotoAnswerPage.putExtra("QuestionText" , questions.getQuestionText());
+                mContext.startActivity(gotoAnswerPage);
+            }
+        });
     }
 
     @Override
@@ -51,19 +73,19 @@ public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<Qu
         private TextView tv_quorabay_post_topic;
         private TextView tv_quorabay_post_asked_on;
         private TextView tv_post_questionText;
-        private ImageView like, dislike, comment;
-        private TextView likes, dislikes , comments;
+        private ImageView like, dislike, answer;
+        private TextView likes, dislikes , answers;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_quorabay_post_asked = itemView.findViewById(R.id.tv_quorabay_post_asked);
             tv_quorabay_post_topic = itemView.findViewById(R.id.tv_quorabay_post_topic);
             tv_quorabay_post_asked_on = itemView.findViewById(R.id.tv_quorabay_post_asked_on);
-            like = itemView.findViewById(R.id.iv_quorabay_post_like);
+            like = itemView.findViewById(R.id.iv_quorabay_answer_like);
             dislike = itemView.findViewById(R.id.iv_quorabay_post_dislike);
-            comment = itemView.findViewById(R.id.iv_quorabay_post_comment);
-            likes = itemView.findViewById(R.id.tv_quorabay_post_likes);
-            dislikes = itemView.findViewById(R.id.tv_quorabay_post_dislikes);
-            comments = itemView.findViewById(R.id.tv_quorabay_post_comments);
+            answer = itemView.findViewById(R.id.iv_quorabay_answer_answer);
+            likes = itemView.findViewById(R.id.tv_quorabay_answer_likes);
+            dislikes = itemView.findViewById(R.id.tv_quorabay_answer_dislikes);
+            answers = itemView.findViewById(R.id.tv_quorabay_answer_answers);
             tv_post_questionText = itemView.findViewById(R.id.tv_post_questionText);
         }
     }
