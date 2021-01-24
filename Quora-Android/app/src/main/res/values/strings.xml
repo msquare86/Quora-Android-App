@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">QuorabayActivity</string>
+
+    <string name="quora_navigation_drawer_open">Open navigation drawer</string>
+    <string name="quora_navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="topics">
+        <item>select topic</item>
+        <item>Technology</item>
+        <item>Food</item>
+        <item>Music</item>
+        <item>Entertainment</item>
+        <item>Sports</item>
+    </string-array>
+</resources>

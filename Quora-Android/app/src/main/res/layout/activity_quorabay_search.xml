@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".quorabay.QuorabaySearchActivity">
+
+<!--    <com.arlib.floatingsearchview.FloatingSearchView-->
+<!--        android:id="@+id/floating_search_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="80dp"-->
+<!--        app:floatingSearch_searchBarMarginLeft="10dp"-->
+<!--        app:floatingSearch_searchBarMarginTop="10sp"-->
+<!--        app:floatingSearch_searchBarMarginRight="10sp"-->
+<!--        app:floatingSearch_searchHint="Search..."-->
+<!--        app:floatingSearch_suggestionsListAnimDuration="250"-->
+<!--        app:floatingSearch_showSearchKey="false"-->
+<!--        app:floatingSearch_leftActionMode="showHamburger"-->
+<!--        app:floatingSearch_close_search_on_keyboard_dismiss="true">-->
+<!--    </com.arlib.floatingsearchview.FloatingSearchView>-->
+    <com.arlib.floatingsearchview.FloatingSearchView
+        android:id="@+id/fsv_quorabay_search_floatingSearch"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:floatingSearch_searchBarMarginLeft="10dp"
+        app:floatingSearch_searchBarMarginTop="10sp"
+        app:floatingSearch_searchBarMarginRight="10sp"
+        app:floatingSearch_searchHint="Search..."
+        app:floatingSearch_suggestionsListAnimDuration="250"
+        app:floatingSearch_showSearchKey="false"
+        app:floatingSearch_leftActionMode="showHamburger"
+        app:floatingSearch_close_search_on_keyboard_dismiss="true">
+    </com.arlib.floatingsearchview.FloatingSearchView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_marginTop="90sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10dp">
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

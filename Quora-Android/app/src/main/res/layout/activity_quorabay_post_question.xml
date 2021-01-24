@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".quorabay.QuorabayPostQuestionActivity">
+
+    <androidx.appcompat.widget.Toolbar
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/quorabay_postquestion_question_toolbar"
+        android:background="#881d16"
+        android:elevation="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ask a question"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="#881d16"
+        android:textStyle="bold"
+        android:layout_margin="10dp"/>
+
+    <Spinner
+        android:id="@+id/quorabay__postquestion_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:entries="@array/topics" />
+
+    <EditText
+        android:id="@+id/et_quorabay_postquestion_askQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your question here"
+        android:textSize="18sp"
+        android:layout_margin="10dp"
+        android:textColor="#881d16"
+        android:textColorHint="#881d16"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_quorabay_postquestion_cancel"
+            android:layout_width="wrap_content"
+            android:backgroundTint="@color/cardview_light_background"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textColor="#881d16"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btn_quorabay_postquestion_postQuestion"
+            android:backgroundTint="@color/cardview_light_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Post Question"
+            android:textColor="#881d16"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:textAllCaps="false"/>
+    </LinearLayout>
+
+</LinearLayout>
