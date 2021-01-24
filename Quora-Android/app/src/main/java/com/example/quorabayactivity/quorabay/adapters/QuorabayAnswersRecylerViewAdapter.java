@@ -51,6 +51,8 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        final int[] like = {0};
+        final int[] dislike = {0};
         Retrofit retrofit = RetrofitBuilder.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
 
@@ -131,15 +133,12 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
         likeCall.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Toast.makeText(mContext , "like" + response, Toast.LENGTH_LONG).show();
-                Log.d("like", "onResponse: " + response.body());
-                //holder.tv_quorabay_answer_likes.setText(response.body());
+                like[0] = response.body().intValue();
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-                Toast.makeText(mContext, "Failed" + t, Toast.LENGTH_LONG).show();
-                Log.d("Like Count" , "T");
+
             }
         });
 
@@ -147,17 +146,18 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
         dislikeCall.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Toast.makeText(mContext , "dislike" + response, Toast.LENGTH_LONG).show();
-                //holder.tv_quorabay_answer_dislikes.setText(response.body());
+                dislike[0] = response.body().intValue();
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-                Toast.makeText(mContext, "Failed" + t, Toast.LENGTH_LONG).show();
-                Log.d("DisLike Count" , "T");
+
             }
         });
-     }
+
+        holder.tv_quorabay_answer_likes.setText(String.valueOf(like[0]));
+        holder.tv_quorabay_answer_dislikes.setText(String.valueOf(dislike[0]));
+    }
 
     @Override
     public int getItemCount() {

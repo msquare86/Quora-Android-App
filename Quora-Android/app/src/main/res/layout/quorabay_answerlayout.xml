@@ -106,7 +106,7 @@
             android:src="@drawable/ic_baseline_comment_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_quorabay_post_dislike"
+            app:layout_constraintStart_toEndOf="@+id/iv_quorabay_answer_dislike"
             app:layout_constraintTop_toBottomOf="@+id/tv_quorabay_answer_date"
             app:layout_constraintVertical_bias="0.536"
             tools:ignore="MissingConstraints" />

@@ -41,6 +41,9 @@ public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<Qu
         holder.tv_quorabay_post_asked_on.setText(questions.getDate());
         holder.tv_quorabay_post_asked.setText(questions.getUserId());
         holder.tv_quorabay_post_topic.setText(questions.getCategoryId());
+        //
+
+        //Intent intent = new Intent(mContext,)
 
         holder.answer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +84,7 @@ public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<Qu
             tv_quorabay_post_topic = itemView.findViewById(R.id.tv_quorabay_post_topic);
             tv_quorabay_post_asked_on = itemView.findViewById(R.id.tv_quorabay_post_asked_on);
             like = itemView.findViewById(R.id.iv_quorabay_answer_like);
-            dislike = itemView.findViewById(R.id.iv_quorabay_post_dislike);
             answer = itemView.findViewById(R.id.iv_quorabay_answer_answer);
-            likes = itemView.findViewById(R.id.tv_quorabay_answer_likes);
             dislikes = itemView.findViewById(R.id.tv_quorabay_answer_dislikes);
             answers = itemView.findViewById(R.id.tv_quorabay_answer_answers);
             tv_post_questionText = itemView.findViewById(R.id.tv_post_questionText);
