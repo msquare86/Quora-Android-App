@@ -12,10 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuorabayActivity"
         android:usesCleartextTraffic="true">
-        <activity android:name=".quorabay.QuorabayOwnerHomeActivity"></activity>
+        <activity android:name=".quorabay.QuorabayAddModeratorActivity"></activity>
+        <activity android:name=".quorabay.QuorabayModeratorActivity" />
+        <activity android:name=".quorabay.QuorabayUserFollowRequestActivity" />
+        <activity android:name=".quorabay.QuorabayMyAnswersActivity" />
+        <activity android:name=".quorabay.QuorabayMyQuestionsActivity" />
+        <activity android:name=".quorabay.QuorabayFollowerListActivity" />
+        <activity android:name=".quorabay.QuorabayOwnerHomeActivity" />
         <activity android:name=".quorabay.QuorabayUserProfileActivity" />
         <activity android:name=".quorabay.QuorabayAnswerActivity" />
-        <activity android:name=".quorabay.QuorabaySearchActivity" />
+        <activity android:name=".quorabay.QuorabaySearchActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
         <activity android:name=".quorabay.QuorabaySportsActivity" />
         <activity android:name=".quorabay.QuorabayTechnologyActivity" />
         <activity android:name=".quorabay.QuorabayMusicActivity" />

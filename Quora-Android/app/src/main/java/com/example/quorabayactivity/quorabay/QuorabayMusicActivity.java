@@ -35,7 +35,7 @@ public class QuorabayMusicActivity extends AppCompatActivity {
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
 
         // Api Call
-        Call<List<Questions>> questionApiCall = iPostAPI.getQuestions();
+        Call<List<Questions>> questionApiCall = iPostAPI.getQuestionByCategoryId("c1");
         questionApiCall.enqueue(new Callback<List<Questions>>() {
             @Override
             public void onResponse(Call<List<Questions>> call, Response<List<Questions>> response) {

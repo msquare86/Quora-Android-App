@@ -4,8 +4,12 @@
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_moderator_list"
+            android:id="@+id/nav_owner_moderator_list"
             android:title="Moderator list"
             android:icon="@drawable/ic_baseline_groups_24"/>
+        <item
+            android:id="@+id/nav_owner_profile"
+            android:title="Profile"
+            android:icon="@drawable/ic_baseline_person_add_24"/>
     </group>
 </menu>

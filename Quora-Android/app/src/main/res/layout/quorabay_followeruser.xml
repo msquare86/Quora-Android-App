@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/row_quorabay_search_recylerview"
+    android:id="@+id/row_quorabay_followeruser_recylerview"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/iv_quorabay_search_userImage"
-            android:layout_width="75sp"
-            android:layout_height="75sp"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
             android:padding="5sp"
             android:scaleType="fitXY"
             android:src="@drawable/quorabay_profile_image"
@@ -37,16 +37,13 @@
             android:id="@+id/tv_quorabay_search_userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
             android:hint="UserName"
-            android:textColor="@color/quorabay_text_color"
+            android:fontFamily="sans-serif"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.26"
-            app:layout_constraintStart_toEndOf="@+id/iv_quorabay_search_userImage"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            android:textColor="@color/quorabay_text_color"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="175dp"
+            tools:layout_editor_absoluteY="41dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -40,6 +40,7 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
     private FloatingActionButton floatingActionButton;
     private SearchView searchView;
     private ClipData.Item logoutButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +96,7 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
             public void onResponse(Call<List<Questions>> call, Response<List<Questions>> response) {
                 Log.d("Response" , response.body().toString());
                 for (Questions questions : response.body()){
-                    Log.d("Response", "onResponse: sfsfs");
+                    Log.d("Question Response", "onResponse: user");
                     questionsList.add(questions);
                 }
                 Log.d("Question page", "onResponse: " + questionsList.size());

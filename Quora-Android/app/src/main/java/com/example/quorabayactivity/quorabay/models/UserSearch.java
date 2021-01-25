@@ -7,17 +7,20 @@ public class UserSearch {
     @SerializedName("userId")
     private String userId;
 
-    public UserSearch(String userId, String profileImage, String userName) {
-        this.userId = userId;
-        this.profileImage = profileImage;
-        this.userName = userName;
-    }
-
-    @SerializedName("profileImage")
-    private String profileImage;
+    @SerializedName("imageUrl")
+    private String imageUrl;
 
     @SerializedName("userName")
     private String userName;
+
+    public UserSearch() {
+    }
+
+    public UserSearch(String userId, String imageUrl, String userName) {
+        this.userId = userId;
+        this.imageUrl = imageUrl;
+        this.userName = userName;
+    }
 
     public String getUserId() {
         return userId;
@@ -27,12 +30,12 @@ public class UserSearch {
         this.userId = userId;
     }
 
-    public String getProfileImage() {
-        return profileImage;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getUserName() {
@@ -47,7 +50,7 @@ public class UserSearch {
     public String toString() {
         return "UserSearch{" +
                 "userId='" + userId + '\'' +
-                ", profileImage='" + profileImage + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
                 ", userName='" + userName + '\'' +
                 '}';
     }

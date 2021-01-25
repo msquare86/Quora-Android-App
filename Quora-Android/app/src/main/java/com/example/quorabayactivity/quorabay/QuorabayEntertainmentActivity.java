@@ -35,13 +35,13 @@ public class QuorabayEntertainmentActivity extends AppCompatActivity {
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
 
         // Api Call
-        Call<List<Questions>> questionApiCall = iPostAPI.getQuestions();
+        Call<List<Questions>> questionApiCall = iPostAPI.getQuestionByCategoryId("c4");
         questionApiCall.enqueue(new Callback<List<Questions>>() {
             @Override
             public void onResponse(Call<List<Questions>> call, Response<List<Questions>> response) {
                 Log.d("Response" , response.body().toString());
                 for (Questions questions : response.body()){
-                    Log.d("Response", "onResponse: sfsfs");
+                    Log.d("Response", "onResponse: entertainment");
                     questionsList.add(questions);
                 }
                 Log.d("Question page", "onResponse: " + questionsList.size());

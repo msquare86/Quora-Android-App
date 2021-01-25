@@ -2,7 +2,7 @@ package com.example.quorabayactivity.quorabay.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OwnerModeratorMapper{
+public class ModeratorDetails {
 
 	@SerializedName("ownerId")
 	private String ownerId;

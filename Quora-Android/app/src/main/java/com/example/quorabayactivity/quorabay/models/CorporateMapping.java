@@ -2,20 +2,31 @@ package com.example.quorabayactivity.quorabay.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CorporateName{
+public class CorporateMapping {
 
-	@SerializedName("corporateName")
-	private String corporateName;
+	@SerializedName("role")
+	private String role;
+
+	@SerializedName("userId")
+	private String userId;
 
 	@SerializedName("corporateId")
 	private String corporateId;
 
-	public void setCorporateName(String corporateName){
-		this.corporateName = corporateName;
+	public void setRole(String role){
+		this.role = role;
 	}
 
-	public String getCorporateName(){
-		return corporateName;
+	public String getRole(){
+		return role;
+	}
+
+	public void setUserId(String userId){
+		this.userId = userId;
+	}
+
+	public String getUserId(){
+		return userId;
 	}
 
 	public void setCorporateId(String corporateId){
@@ -29,8 +40,9 @@ public class CorporateName{
 	@Override
  	public String toString(){
 		return 
-			"CorporateName{" + 
-			"corporateName = '" + corporateName + '\'' + 
+			"Corporate{" + 
+			"role = '" + role + '\'' + 
+			",userId = '" + userId + '\'' + 
 			",corporateId = '" + corporateId + '\'' + 
 			"}";
 		}

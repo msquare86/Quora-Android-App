@@ -40,6 +40,14 @@
             android:title="Followers"
             android:icon="@drawable/quorabay_follower"
             />
+        <item android:id="@+id/quorabay_nav_follow_request"
+            android:title="Follow Request"
+            android:icon="@drawable/ic_baseline_person_add_24"
+            />
+        <item android:id="@+id/quorabay_nav_notifications"
+            android:title="Notifications"
+            android:icon="@drawable/ic_baseline_notifications_24" />
+
         <item
             android:id="@+id/quorabay_nav_logout"
             android:title="Logout"

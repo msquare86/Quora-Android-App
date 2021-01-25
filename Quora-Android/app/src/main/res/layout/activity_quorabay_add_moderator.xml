@@ -18,30 +18,24 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ask a question"
+        android:text="Add a Moderator"
         android:gravity="center"
         android:textSize="20sp"
         android:textColor="@color/quorabay_dark"
         android:textStyle="bold"
         android:layout_margin="10dp"/>
 
-<!--    <Spinner-->
-<!--        android:id="@+id/quorabay__postquestion_spinner"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:entries="@array/topics" />-->
     <EditText
-        android:id="@+id/et_quorabay_post_question_topic"
+        android:id="@+id/et_quorabay_addmoderator_moderatorName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Topic Name"/>
+        android:hint="Enter Moderator Name"/>
 
     <EditText
-        android:id="@+id/et_quorabay_postquestion_askQuestion"
+        android:id="@+id/et_quorabay_addmoderator_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your question here"
+        android:hint="Enter Moderator Email"
         android:textSize="18sp"
         android:layout_margin="10dp"
         android:textColor="@color/quorabay_text_color"
@@ -53,7 +47,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_quorabay_postquestion_cancel"
+            android:id="@+id/btn_quorabay_addmoderator_cancel"
             android:layout_width="wrap_content"
             android:backgroundTint="@color/quorabay_dark"
             android:layout_height="wrap_content"
@@ -67,14 +61,14 @@
             android:textAllCaps="false"/>
 
         <Button
-            android:id="@+id/btn_quorabay_postquestion_postQuestion"
+            android:id="@+id/btn_quorabay_addmoderator_add"
             android:backgroundTint="@color/quorabay_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Post Question"
+            android:text="Add"
             android:background="@color/quorabay_dark"
-            android:textColor="@color/quorabay_dark"
+            android:textColor="@color/quorabay_light"
             android:layout_margin="10dp"
             android:textSize="20sp"
             android:textAllCaps="false"/>

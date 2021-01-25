@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.adapters.QuorabaySearchRecylerViewAdapter;
-import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
+import com.example.quorabayactivity.quorabay.builders.RetrofitSearch;
 import com.example.quorabayactivity.quorabay.models.UserSearch;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,10 +28,8 @@ public class QuorabaySearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_search);
 
-        Retrofit retrofit = RetrofitBuilder.getInstance();
-        IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
-
-        List<UserSearch> productDetailsList = new ArrayList<>();
+        Retrofit retrofitSearch = RetrofitSearch.getInstance();
+        IPostAPI iPostAPI = retrofitSearch.create(IPostAPI.class);
 
         RecyclerView recyclerView = findViewById(R.id.search_RecyclerView);
         FloatingSearchView mSearchView = findViewById(R.id.fsv_quorabay_search_floatingSearch);
@@ -44,10 +41,12 @@ public class QuorabaySearchActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<List<UserSearch>> call, Response<List<UserSearch>> response) {
                     Log.d("search", "onResponse: "+ response.body());
+                    if(!(response.body() == null)){
+                        QuorabaySearchRecylerViewAdapter recyclerViewAdapter = new QuorabaySearchRecylerViewAdapter(response.body(), QuorabaySearchActivity.this);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(QuorabaySearchActivity.this));
+                        recyclerView.setAdapter(recyclerViewAdapter);
+                    }
 
-                    QuorabaySearchRecylerViewAdapter recyclerViewAdapter = new QuorabaySearchRecylerViewAdapter(response.body(), QuorabaySearchActivity.this);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(QuorabaySearchActivity.this));
-                    recyclerView.setAdapter(recyclerViewAdapter);
                 }
 
                 @Override

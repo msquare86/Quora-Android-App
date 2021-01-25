@@ -14,11 +14,13 @@
         <ImageView
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:id="@+id/quorabay_userProfile_profileImage"
             android:src="@drawable/quorabay_profile_image" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username"
+            android:hint="Username"
+            android:id="@+id/quorabay_userProfile_userName"
             android:textColor="@color/quorabay_dark"
             android:textSize="20dp"
             android:layout_marginTop="8dp"
@@ -44,7 +46,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:hint="Name"
+            android:id="@+id/quorabay_userProfile_fullName"
             android:textStyle="bold"
             android:textColor="@color/quorabay_dark"
             android:textSize="18dp"
@@ -53,7 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
-            android:text="Username"
+            android:hint="Username"
+            android:id="@+id/quorabay_userPorfile_userName"
             android:textSize="18dp"
             android:textColor="@color/quorabay_text_color"
             />
@@ -80,7 +84,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:hint="Email"
+
             android:textStyle="bold"
             android:textColor="@color/quorabay_dark"
             android:textSize="18dp"
@@ -89,7 +94,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
-            android:text="Username@gmail.com"
+            android:hint="Username@gmail.com"
+            android:id="@+id/quorabay_userProfile_Email"
             android:textSize="18dp"
             android:textColor="@color/quorabay_text_color"
             />
@@ -146,6 +152,7 @@
     <Button
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:id="@+id/quorabay_userProfile_editProfile"
         android:background="@drawable/quorabay_btn_update"
         android:text="Edit Profile"
         android:backgroundTint="@color/quorabay_dark"

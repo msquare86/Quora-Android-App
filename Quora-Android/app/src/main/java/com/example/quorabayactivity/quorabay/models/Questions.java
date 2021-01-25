@@ -16,8 +16,8 @@ public class Questions {
     @SerializedName("date")
     private String date;
 
-    @SerializedName("categoryId")
-    private String categoryId;
+    @SerializedName("category")
+    private Category category;
 
     @SerializedName("corporateId")
     private  String corporateId;
@@ -25,12 +25,12 @@ public class Questions {
     public Questions() {
     }
 
-    public Questions(String questionId, String userId, String questionText, String date, String categoryId, String corporateId) {
+    public Questions(String questionId, String userId, String questionText, String date, Category category, String corporateId) {
         this.questionId = questionId;
         this.userId = userId;
         this.questionText = questionText;
         this.date = date;
-        this.categoryId = categoryId;
+        this.category = category;
         this.corporateId = corporateId;
     }
 
@@ -66,12 +66,12 @@ public class Questions {
         this.date = date;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getCorporateId() {
@@ -80,5 +80,17 @@ public class Questions {
 
     public void setCorporateId(String corporateId) {
         this.corporateId = corporateId;
+    }
+
+    @Override
+    public String toString() {
+        return "Questions{" +
+                "questionId='" + questionId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", questionText='" + questionText + '\'' +
+                ", date='" + date + '\'' +
+                ", category=" + category +
+                ", corporateId='" + corporateId + '\'' +
+                '}';
     }
 }

@@ -2,6 +2,7 @@ package com.example.quorabayactivity.quorabay.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.QuorabayAnswerActivity;
+import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
 import com.example.quorabayactivity.quorabay.models.Questions;
+import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 
 import java.util.List;
+
+import retrofit2.Retrofit;
 
 public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<QuorabayQuestionsRecylerViewAdapter.ViewHolder> {
 
@@ -37,13 +42,15 @@ public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<Qu
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Questions questions = mQuestionsList.get(position);
+        String choice = questions.getCategory().getCategoryName();
+        Log.d("cac", "onBindViewHolder: " + choice);
+        Retrofit retrofit = RetrofitBuilder.getInstance();
+        IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
+        Log.d("Cqtegory", "onBindViewHolder:" + choice) ;
         holder.tv_post_questionText.setText(questions.getQuestionText());
-        holder.tv_quorabay_post_asked_on.setText(questions.getDate());
+        holder.tv_quorabay_post_asked_on.setText( questions.getDate());
         holder.tv_quorabay_post_asked.setText(questions.getUserId());
-        holder.tv_quorabay_post_topic.setText(questions.getCategoryId());
-        //
-
-        //Intent intent = new Intent(mContext,)
+        holder.tv_quorabay_post_topic.setText(choice);
 
         holder.answer.setOnClickListener(new View.OnClickListener() {
             @Override

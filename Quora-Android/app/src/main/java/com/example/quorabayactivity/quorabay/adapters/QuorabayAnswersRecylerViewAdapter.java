@@ -68,7 +68,7 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
                 PostReaction postReaction = new PostReaction();
                 postReaction.setAnswerId(answers.getAnswerId());
                 postReaction.setReactionStatus(1);
-                postReaction.setUserId("u5");
+                postReaction.setUserId("u6");
 
                 Call<ResponseBody> responseBodyCall = iPostAPI.reactOnLikeDislike(postReaction);
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -85,15 +85,13 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
                 });
             }
         });
-
         holder.dislike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PostReaction postReaction = new PostReaction();
                 postReaction.setAnswerId(answers.getAnswerId());
                 postReaction.setReactionStatus(-1);
-                postReaction.setUserId("u5");
-
+                postReaction.setUserId("u6");
                 Call<ResponseBody> responseBodyCall = iPostAPI.reactOnLikeDislike(postReaction);
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -133,7 +131,11 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
         likeCall.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                like[0] = response.body().intValue();
+                if (response.body() != null) {
+                    like[0] = response.body().intValue();
+                    Log.d("Like Cnt", "onResponse: " + like[0]);
+                    holder.tv_quorabay_answer_likes.setText(String.valueOf(like[0]));
+                }
             }
 
             @Override
@@ -146,17 +148,20 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
         dislikeCall.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                dislike[0] = response.body().intValue();
+                if (response.body() != null) {
+                    dislike[0] = response.body().intValue();
+                    Log.d("Dislike Cnt", "onResponse: " + response.body().intValue());
+                    holder.tv_quorabay_answer_dislikes.setText(String.valueOf(dislike[0]));
+                }
             }
-
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
 
             }
         });
 
-        holder.tv_quorabay_answer_likes.setText(String.valueOf(like[0]));
-        holder.tv_quorabay_answer_dislikes.setText(String.valueOf(dislike[0]));
+//        holder.tv_quorabay_answer_likes.setText(String.valueOf(like[0]));
+//        holder.tv_quorabay_answer_dislikes.setText(String.valueOf(dislike[0]));
     }
 
     @Override

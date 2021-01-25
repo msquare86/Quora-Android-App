@@ -2,10 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="10dp"
     android:elevation="10dp"
+    android:background="@color/quorabay_light"
     android:layout_margin="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,10 +46,10 @@
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintHorizontal_bias="0.048"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.17" />
+            app:layout_constraintVertical_bias="0.206" />
 
         <TextView
             android:id="@+id/tv_quorabay_answer_answerText"
@@ -90,26 +91,23 @@
             android:src="@drawable/ic_quorabay_downvote"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.056"
             app:layout_constraintStart_toEndOf="@+id/iv_quorabay_answer_like"
             app:layout_constraintTop_toBottomOf="@+id/tv_quorabay_answer_answerText"
-            app:layout_constraintVertical_bias="0.224"
+            app:layout_constraintVertical_bias="0.288"
             tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/iv_quorabay_answer_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="64dp"
-            android:layout_weight="1"
             android:src="@drawable/ic_baseline_comment_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_quorabay_answer_dislike"
-            app:layout_constraintTop_toBottomOf="@+id/tv_quorabay_answer_date"
-            app:layout_constraintVertical_bias="0.536"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintHorizontal_bias="0.872"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.73" />
 
         <TextView
             android:id="@+id/tv_quorabay_answer_likes"
@@ -147,20 +145,16 @@
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/tv_quorabay_answer_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="42dp"
-            android:layout_weight="1"
+            android:id="@+id/tv_quorabay_answer_comment"
             android:text="View All Comments"
-            android:textColor="#000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.904"
-            app:layout_constraintStart_toEndOf="@+id/tv_quorabay_answer_dislikes"
-            app:layout_constraintTop_toBottomOf="@+id/iv_quorabay_answer_answer"
-            app:layout_constraintVertical_bias="0.145"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintHorizontal_bias="0.951"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.885" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

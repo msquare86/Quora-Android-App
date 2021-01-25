@@ -2,21 +2,24 @@ package com.example.quorabayactivity.quorabay;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
+import com.example.quorabayactivity.quorabay.builders.RetrofitData;
+import com.example.quorabayactivity.quorabay.dto.DataanalyticsPost;
+import com.example.quorabayactivity.quorabay.models.Category;
 import com.example.quorabayactivity.quorabay.models.Questions;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 
@@ -42,7 +45,7 @@ public class QuorabayPostQuestionActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.quorabay_postquestion_question_toolbar);
         //getSupportActionBar().setTitle("Post a question");
 
-        spinner = findViewById(R.id.quorabay__postquestion_spinner);
+        //spinner = findViewById(R.id.quorabay__postquestion_spinner);
         questionBox = findViewById(R.id.et_quorabay_postquestion_askQuestion);
         cancelButton = findViewById(R.id.btn_quorabay_postquestion_cancel);
         postQuestionButton = findViewById(R.id.btn_quorabay_postquestion_postQuestion);
@@ -53,19 +56,19 @@ public class QuorabayPostQuestionActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.topics));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        //spinner.setAdapter(adapter);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(QuorabayPostQuestionActivity.this, "clicked" + position, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(QuorabayPostQuestionActivity.this, "Select 1 Item", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(QuorabayPostQuestionActivity.this, "clicked" + position, Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                Toast.makeText(QuorabayPostQuestionActivity.this, "Select 1 Item", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         cancelButton.setOnClickListener(v -> {
             Intent intent = new Intent(QuorabayPostQuestionActivity.this, QuorabayHomeActivity.class);
@@ -87,22 +90,45 @@ public class QuorabayPostQuestionActivity extends AppCompatActivity {
 //            else{
 
                 EditText editText = findViewById(R.id.et_quorabay_postquestion_askQuestion);
+                EditText topic = findViewById(R.id.et_quorabay_post_question_topic);
                 Questions questions = new Questions();
-                questions.setCategoryId("c2");
+                Category category = new Category();
+                category.setCategoryId("c1");
+                category.setCategoryName(topic.getText().toString());
                 questions.setCorporateId("c1");
                 questions.setUserId("u3");
                 questions.setQuestionText(editText.getText().toString());
-
+                questions.setCategory(category);
                 Call<ResponseBody> responseBodyCall = iPostAPI.createQuestion(questions);
-
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Toast.makeText(QuorabayPostQuestionActivity.this , "Question Successfully Added", Toast.LENGTH_LONG).show();
+
+                        Retrofit retrofit1 = RetrofitData.getInstance();
+                        IPostAPI iPostAPI1 = retrofit1.create(IPostAPI.class);
+                        DataanalyticsPost dataanalyticsPost = new DataanalyticsPost();
+                        dataanalyticsPost.setAction("post");
+                        dataanalyticsPost.setCategoryName("music");
+                        dataanalyticsPost.setChannelId(1);
+                        dataanalyticsPost.setType("text");
+                        dataanalyticsPost.setPostId("1");
+                        Call<ResponseBody> postAnalyticcall = iPostAPI1.postToAnalytics(dataanalyticsPost);
+                        postAnalyticcall.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                Log.d("Data", "onResponse: nothing");
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.d("Data Fail", "onFailure: " + t);
+                            }
+                        });
                         Intent intent = new Intent(QuorabayPostQuestionActivity.this,QuorabayHomeActivity.class);
                         startActivity(intent);
                     }
-
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Toast.makeText(QuorabayPostQuestionActivity.this, "Failed" + t, Toast.LENGTH_LONG).show();

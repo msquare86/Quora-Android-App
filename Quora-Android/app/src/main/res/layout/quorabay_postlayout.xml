@@ -26,6 +26,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:hint="Asked by"
+                android:layout_marginLeft="10dp"
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:textSize="15dp"
@@ -42,14 +43,16 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_marginLeft="5dp">
+
             <TextView
+                android:id="@+id/tv_quorabay_post_topic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:gravity="center"
-                android:hint="Entertainment"
-                android:id="@+id/tv_quorabay_post_topic"
                 android:textSize="15dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_post_questionText"
-
+                android:layout_marginLeft="10dp"
                 android:textStyle="bold" />
 
         </LinearLayout>

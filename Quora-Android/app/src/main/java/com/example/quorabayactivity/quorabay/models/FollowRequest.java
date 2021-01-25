@@ -2,7 +2,7 @@ package com.example.quorabayactivity.quorabay.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Followers {
+public class FollowRequest {
 
     @SerializedName("id")
     private String id;
@@ -12,6 +12,15 @@ public class Followers {
 
     @SerializedName("followerId")
     private String followerId;
+
+    public FollowRequest() {
+    }
+
+    public FollowRequest(String id, String userId, String followerId) {
+        this.id = id;
+        this.userId = userId;
+        this.followerId = followerId;
+    }
 
     public String getId() {
         return id;
@@ -39,7 +48,7 @@ public class Followers {
 
     @Override
     public String toString() {
-        return "Followers{" +
+        return "FollowRequest{" +
                 "id='" + id + '\'' +
                 ", userId='" + userId + '\'' +
                 ", followerId='" + followerId + '\'' +

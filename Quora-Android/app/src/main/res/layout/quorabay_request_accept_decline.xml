@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:elevation="10dp"
+    android:id="@+id/row_quorabay_request_accept_decline_cardview"
     android:padding="5dp">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,31 +14,26 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/quorabay_profile_image"
-            android:id="@+id/quora_commentor_profile_img"/>
+            android:id="@+id/iv_quorabay_request_accept_decline_image"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:orientation="vertical"
-            android:layout_toEndOf="@id/quora_commentor_profile_img">
+            android:layout_toEndOf="@id/iv_quorabay_request_accept_decline_image">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="@color/quorabay_dark"
                 android:text="username"
-                android:id="@+id/quora_commentor_username"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/quora_commentor_userName"
-                android:textColor="@color/quorabay_text_color"
-                android:text="email"/>
+                android:id="@+id/tv_quorabay_request_accept_decline_userName"/>
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="horizontal">
                 <Button
+                    android:id="@+id/btn_quorabay_request_accept_decline_accept"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Accept"
@@ -44,6 +41,7 @@
                     android:backgroundTint="@color/quorabay_dark"
                     />
                 <Button
+                    android:id="@+id/btn_quorabay_request_accept_decline_decline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/quorabay_dark"
@@ -53,4 +51,4 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

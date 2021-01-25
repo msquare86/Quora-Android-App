@@ -1,6 +1,7 @@
 package com.example.quorabayactivity.quorabay.networks;
 
 import com.example.quorabayactivity.quorabay.dto.CommentData;
+import com.example.quorabayactivity.quorabay.dto.DataanalyticsPost;
 import com.example.quorabayactivity.quorabay.dto.PostAnswer;
 import com.example.quorabayactivity.quorabay.dto.PostComment;
 import com.example.quorabayactivity.quorabay.dto.PostReaction;
@@ -36,9 +37,6 @@ public interface IPostAPI {
         @GET("quora/question/{questionId}")
         Call<Questions> getQuestionById(@Path("questionId") String questionId);
 
-        @GET("quora/question/category/{categoryId}")
-        Call<List<Questions>> getQuestionByCategoryId (@Path("categoryId") String categoryId);
-
         @GET("quora/question/user/{userId}")
         Call<List<Questions>> getQuestionByUserId (@Path("userId") String userId);
 
@@ -47,6 +45,12 @@ public interface IPostAPI {
 
         @GET("quora/question/count/{userId}")
         Call<Integer> getQuestionCountByUserId (@Path("userId") String userId);
+
+        @GET("quora/question/category/{categoryId}")
+        Call<List<Questions>> getQuestionByCategoryId(@Path("categoryId") String categoryId);
+
+        @GET("quora/question/categoryname/{categoryId}")
+        Call<String> getCategoryNameByCategoryId(@Path("categoryId") String categoryId);
  //=================================================================================================
 
 // For Answer ====================================================================================
@@ -121,6 +125,17 @@ public interface IPostAPI {
 
     @GET("quora/answer/countdislike/{answerId}")
     Call<Integer> countDislikeByAnswerId(@Path("answerId") String answerId);
+//=================================================================================================
+// For DataAnalytics=================================================================================================
+
+    @POST ("analytics")
+    Call<ResponseBody> postToAnalytics(@Body DataanalyticsPost dataanalyticsPost);
+//=================================================================================================
+
+// For Followers =================================================================================================
+
+//    @GET("quora/profile/{userId}")
+//    Call<List<>>
 //=================================================================================================
 
 
