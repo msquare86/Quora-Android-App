@@ -1,6 +1,8 @@
 package com.example.quorabayactivity.quorabay.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.quorabayactivity.R;
-import com.example.quorabayactivity.quorabay.models.UserSearch;
+import com.example.quorabayactivity.quorabay.QuorabayUserProfileActivity;
+import com.example.quorabayactivity.quorabay.models.UserDetails;
+import com.google.gson.Gson;
 
 import java.util.List;
 
 public class QuorabayUserFollowersRecylerViewAdapter extends RecyclerView.Adapter<QuorabayUserFollowersRecylerViewAdapter.ViewHolder> {
 
-    private final List<UserSearch> mUserFollowerList;
+    private final List<UserDetails> mUserFollowerList;
     private final Context mContext;
 
-    public QuorabayUserFollowersRecylerViewAdapter(List<UserSearch> mUserFollowerList, Context mContext) {
+    public QuorabayUserFollowersRecylerViewAdapter(List<UserDetails> mUserFollowerList, Context mContext) {
         this.mUserFollowerList = mUserFollowerList;
         this.mContext = mContext;
     }
@@ -35,13 +39,24 @@ public class QuorabayUserFollowersRecylerViewAdapter extends RecyclerView.Adapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        UserSearch userSearch = mUserFollowerList.get(position);
-        holder.tv_quorabay_search_userName.setText(userSearch.getUserName());
+        UserDetails userDetails = mUserFollowerList.get(position);
+        holder.tv_quorabay_search_userName.setText(userDetails.getUserName());
         Glide.with(holder.iv_quorabay_search_userImage.getContext())
-                .load(userSearch.getImageUrl())
+                .load(userDetails.getImageUrl())
                 .placeholder(R.drawable.quorabay_profile_image)
                 .into(holder.iv_quorabay_search_userImage);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Item Click" , "Hello" );
+                Intent intent = new Intent(mContext, QuorabayUserProfileActivity.class);
+                Gson gson = new Gson();
+                String user = gson.toJson(userDetails);
+                intent.putExtra("UserSearch",  user);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

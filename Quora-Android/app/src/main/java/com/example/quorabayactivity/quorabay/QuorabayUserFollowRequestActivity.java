@@ -1,18 +1,25 @@
 package com.example.quorabayactivity.quorabay;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quorabayactivity.R;
-import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
-import com.example.quorabayactivity.quorabay.models.UserSearch;
+import com.example.quorabayactivity.quorabay.adapters.QuorabayUserFollowRequestRecylerViewAdapter;
+import com.example.quorabayactivity.quorabay.builders.RetrofitFollower;
+import com.example.quorabayactivity.quorabay.models.FollowRequest;
+import com.example.quorabayactivity.quorabay.models.UserProfileData;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class QuorabayUserFollowRequestActivity extends AppCompatActivity {
@@ -22,9 +29,32 @@ public class QuorabayUserFollowRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_user_follow_request);
 
-        List<UserSearch> userSearchList  = new ArrayList<>();
+        FollowRequest followRequest  = new FollowRequest();
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_userfollow_request);
-        Retrofit retrofit = RetrofitBuilder.getInstance();
+        Retrofit retrofit = RetrofitFollower.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
+
+        List<UserProfileData> userProfileDataList = new ArrayList<>();
+
+        Call<List<UserProfileData>> userFollowRequestCall = iPostAPI.getFollowRequestByUserId("u4");
+        userFollowRequestCall.enqueue(new Callback<List<UserProfileData>>() {
+            @Override
+            public void onResponse(Call<List<UserProfileData>> call, Response<List<UserProfileData>> response) {
+                if (response.body() != null){
+                    for (UserProfileData userProfileData : response.body()){
+                        Log.d("user", "onResponse: " + userProfileData.toString());
+                        userProfileDataList.add(userProfileData);
+                    }
+                    Log.d("size", "onResponse: " + userProfileDataList.size());
+                    QuorabayUserFollowRequestRecylerViewAdapter recyclerViewAdapter = new QuorabayUserFollowRequestRecylerViewAdapter(userProfileDataList, QuorabayUserFollowRequestActivity.this);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(QuorabayUserFollowRequestActivity.this));
+                    recyclerView.setAdapter(recyclerViewAdapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<List<UserProfileData>> call, Throwable t) {
+                Log.e("fail follow", "onFailure: " + t );
+            }
+        });
     }
 }

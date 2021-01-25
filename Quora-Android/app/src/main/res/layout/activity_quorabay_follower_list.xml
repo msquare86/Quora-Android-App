@@ -10,7 +10,7 @@
         android:id="@+id/quorabay_follower_userFollowers_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="600dp"
-        android:layout_marginTop="90sp"
+        android:layout_marginTop="200sp"
         android:layout_marginLeft="10sp"
         android:layout_marginRight="10dp"
         tools:ignore="MissingConstraints">

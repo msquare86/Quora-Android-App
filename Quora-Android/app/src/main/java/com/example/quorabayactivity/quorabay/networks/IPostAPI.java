@@ -7,9 +7,12 @@ import com.example.quorabayactivity.quorabay.dto.PostComment;
 import com.example.quorabayactivity.quorabay.dto.PostReaction;
 import com.example.quorabayactivity.quorabay.models.Answers;
 import com.example.quorabayactivity.quorabay.models.Comments;
+import com.example.quorabayactivity.quorabay.models.FollowRequest;
 import com.example.quorabayactivity.quorabay.models.Questions;
 import com.example.quorabayactivity.quorabay.models.Reaction;
 import com.example.quorabayactivity.quorabay.models.User;
+import com.example.quorabayactivity.quorabay.models.UserDetails;
+import com.example.quorabayactivity.quorabay.models.UserProfileData;
 import com.example.quorabayactivity.quorabay.models.UserSearch;
 
 import java.util.List;
@@ -134,8 +137,19 @@ public interface IPostAPI {
 
 // For Followers =================================================================================================
 
-//    @GET("quora/profile/{userId}")
-//    Call<List<>>
+      @GET("quora/profile/{userId}")
+      Call<List<UserDetails>> getFollowersByUserId (@Path("userId") String userId);
+
+      @GET("quora/profile/pending/{userId}")
+      Call<List<UserProfileData>> getFollowRequestByUserId(@Path("userId") String userId);
+
+      @POST("quora/profile/approve")
+      Call<FollowRequest> approveFollowRequest(@Body FollowRequest followRequest);
+//=================================================================================================
+
+// For DataAnalytics=================================================================================================
+
+
 //=================================================================================================
 
 

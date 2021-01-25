@@ -152,6 +152,15 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
                 startActivity(sports);
                 break;
 
+            case R.id.quorabay_nav_followers:
+                Intent followers = new Intent(QuorabayHomeActivity.this , QuorabayFollowerListActivity.class);
+                startActivity(followers);
+                break;
+
+            case R.id.quorabay_nav_follow_request:
+                Intent followRequest = new Intent(QuorabayHomeActivity.this , QuorabayUserFollowRequestActivity.class);
+                startActivity(followRequest);
+                break;
         }
         quorabay_drawer_layout.closeDrawer(GravityCompat.START);
         return true;

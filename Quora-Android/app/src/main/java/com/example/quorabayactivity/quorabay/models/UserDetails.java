@@ -19,6 +19,65 @@ public class UserDetails {
     @SerializedName("imageUrl")
     private String imageUrl;
 
+    public UserDetails() {
+    }
 
+    public UserDetails(String userId, String userName, String ranking, int profileType, String imageUrl) {
+        this.userId = userId;
+        this.userName = userName;
+        this.ranking = ranking;
+        this.profileType = profileType;
+        this.imageUrl = imageUrl;
+    }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(String ranking) {
+        this.ranking = ranking;
+    }
+
+    public int getProfileType() {
+        return profileType;
+    }
+
+    public void setProfileType(int profileType) {
+        this.profileType = profileType;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDetails{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", ranking='" + ranking + '\'' +
+                ", profileType=" + profileType +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }

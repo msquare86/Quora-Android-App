@@ -42,7 +42,9 @@ public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<Qu
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Questions questions = mQuestionsList.get(position);
-        String choice = questions.getCategory().getCategoryName();
+        String choice = "Technology";
+        if (questions.getCategory().getCategoryName() != null)
+            choice = questions.getCategory().getCategoryName();
         Log.d("cac", "onBindViewHolder: " + choice);
         Retrofit retrofit = RetrofitBuilder.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);

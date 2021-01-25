@@ -16,15 +16,6 @@
             android:layout_height="110dp"
             android:id="@+id/quorabay_userProfile_profileImage"
             android:src="@drawable/quorabay_profile_image" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Username"
-            android:id="@+id/quorabay_userProfile_userName"
-            android:textColor="@color/quorabay_dark"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -59,7 +50,7 @@
             android:hint="Username"
             android:id="@+id/quorabay_userPorfile_userName"
             android:textSize="18dp"
-            android:textColor="@color/quorabay_text_color"
+            android:textColor="@color/quorabay_light"
             />
     </LinearLayout>
     <View
@@ -69,37 +60,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:gravity="center_vertical"
-        android:layout_marginTop="20dp">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_email_24"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Email"
 
-            android:textStyle="bold"
-            android:textColor="@color/quorabay_dark"
-            android:textSize="18dp"
-            android:layout_marginLeft="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:hint="Username@gmail.com"
-            android:id="@+id/quorabay_userProfile_Email"
-            android:textSize="18dp"
-            android:textColor="@color/quorabay_text_color"
-            />
-    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"

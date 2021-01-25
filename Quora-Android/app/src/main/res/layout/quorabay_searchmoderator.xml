@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/row_quorabay_followeruser_recylerview"
+    android:id="@+id/row_quorabay_searchmoderator_recylerview"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="70dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
@@ -19,9 +19,9 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/iv_quorabay_search_userImage"
-            android:layout_width="90sp"
-            android:layout_height="90sp"
+            android:id="@+id/iv_quorabay_searchmoderator_userImage"
+            android:layout_width="75sp"
+            android:layout_height="75sp"
             android:padding="5sp"
             android:scaleType="fitXY"
             android:src="@drawable/quorabay_profile_image"
@@ -34,7 +34,7 @@
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/tv_quorabay_search_userName"
+            android:id="@+id/tv_quorabay_searchmoderator_userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -43,11 +43,23 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.324"
-            app:layout_constraintStart_toEndOf="@+id/iv_quorabay_search_userImage"
+            app:layout_constraintHorizontal_bias="0.26"
+            app:layout_constraintStart_toEndOf="@+id/iv_quorabay_searchmoderator_userImage"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.506"
             tools:ignore="MissingConstraints" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:id="@+id/btn_quorabay_search_moderator_add"
+            android:backgroundTint="@color/quorabay_dark"
+            android:text="Add"
+            android:textSize="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.947"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

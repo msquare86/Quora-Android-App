@@ -1,77 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/quora_owner_homepage_layout"
-    tools:openDrawer="start">
-    <LinearLayout
+    tools:openDrawer="start" >
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:id="@+id/quorabay_home_answer_toolbar"
+        android:background="@color/quorabay_dark"
+        android:elevation="4dp"
+        tools:ignore="MissingConstraints">
+        <SearchView
+            android:id="@+id/quorabay_owner_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/quora_home_tool_bar"
-            android:background="@color/quorabay_dark"
-            android:elevation="4dp"/>
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ProgressBar
-                android:id="@+id/quora_progress_circular"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal|center_vertical"/>
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:fabSize="normal"
-                android:src="@drawable/ic_quorabay_add"
-                android:backgroundTint="@color/quorabay_dark"
-                android:layout_gravity="top|center"
-                android:id="@+id/quora_add_moderator"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="logout"
-                android:background="@color/quorabay_dark"
-                android:backgroundTint="@android:color/white"
-                android:textColor="@color/quorabay_text_color"
-                android:textSize="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="top|end"/>
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:fabSize="normal"
-                android:src="@drawable/ic_quorabay_add"
-                android:backgroundTint="@color/quorabay_text_color"
-                android:layout_gravity="bottom|end"
-                android:id="@+id/quora_fab"/>
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:queryHint="Search Here"
-                android:iconifiedByDefault="false"
-                android:id="@+id/quora_owner_search_view">
-            </SearchView>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/quora_nav_recycler_view"/>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    </LinearLayout>
+            android:iconifiedByDefault="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.023"
+            tools:layout_editor_absoluteX="39dp" />
+    </androidx.appcompat.widget.Toolbar>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/quora_nav_view"
+
+    <TextView
+        android:id="@+id/tv_quorabay_owner_moderatorlist"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:headerLayout="@layout/quorabay_nav_header"
-        app:menu="@menu/owner_menu"
-        android:layout_gravity="start"/>
-</androidx.drawerlayout.widget.DrawerLayout>
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/quorabay_dark"
+        android:text="ModeratorList"
+        android:textColor="@color/quorabay_dark"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quorabay_home_answer_toolbar"
+        app:layout_constraintVertical_bias="0.094" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout >

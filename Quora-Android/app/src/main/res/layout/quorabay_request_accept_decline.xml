@@ -10,27 +10,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
+
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/quorabay_profile_image"
-            android:id="@+id/iv_quorabay_request_accept_decline_image"/>
+            android:id="@+id/iv_quorabay_request_accept_decline_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/quorabay_profile_image" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:orientation="vertical"
             android:layout_toEndOf="@id/iv_quorabay_request_accept_decline_image">
+
             <TextView
+                android:id="@+id/tv_quorabay_request_accept_decline_userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/quorabay_dark"
+                android:layout_marginTop="20dp"
                 android:text="username"
-                android:id="@+id/tv_quorabay_request_accept_decline_userName"/>
+                android:textColor="@color/quorabay_dark"
+                android:textSize="24sp"
+                android:textStyle="bold" />
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
                 <Button
                     android:id="@+id/btn_quorabay_request_accept_decline_accept"

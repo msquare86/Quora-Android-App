@@ -39,10 +39,10 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
                 .placeholder(R.drawable.quorabay_profile_image)
                 .into(profileImage);
 
-        userName = findViewById(R.id.quorabay_userProfile_userName);
+
+        userName = findViewById(R.id.quorabay_userPorfile_userName);
         userName.setText(userSearch.getUserName());
         editProfile = findViewById(R.id.quorabay_userProfile_editProfile);
-
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
