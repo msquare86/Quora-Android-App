@@ -4,6 +4,7 @@
    <item
        android:id="@+id/ap_bar_text"
        android:title="Quorabay"
+
        />
 
     <item

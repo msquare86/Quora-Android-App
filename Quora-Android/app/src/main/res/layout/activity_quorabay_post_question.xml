@@ -35,7 +35,12 @@
         android:id="@+id/et_quorabay_post_question_topic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Topic Name"/>
+        android:hint="Enter Topic Name"
+        android:textSize="18sp"
+        android:layout_margin="10dp"
+        android:textColor="@color/quorabay_text_color"
+        android:textColorHint="@color/quorabay_dark"
+        />
 
     <EditText
         android:id="@+id/et_quorabay_postquestion_askQuestion"
@@ -74,7 +79,7 @@
             android:layout_weight="1"
             android:text="Post Question"
             android:background="@color/quorabay_dark"
-            android:textColor="@color/quorabay_dark"
+            android:textColor="@color/quorabay_light"
             android:layout_margin="10dp"
             android:textSize="20sp"
             android:textAllCaps="false"/>

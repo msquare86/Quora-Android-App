@@ -7,6 +7,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.quorabayactivity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,6 +16,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class QuorabayOwnerHomeActivity extends AppCompatActivity  {
     TextView moderatorlist;
     SearchView searchView;
+    private DrawerLayout quorabay_drawer_layout;
+    private Toolbar toolbar;
 
     private FloatingActionButton floatingActionButton;
     @Override

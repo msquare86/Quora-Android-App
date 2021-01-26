@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="180dp"
+    android:layout_marginTop="10dp"
+    android:layout_height="60dp"
+    android:layout_marginLeft="110dp"
+    android:elevation="10dp"
+    android:background="@color/quorabay_dark"
+    >
+
+    <TextView
+        android:id="@+id/tv_quorabay_corporate_pagename"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/quorabay_light"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:backgroundTint="@color/quorabay_dark"
+        android:hint="CorporateName" />
+</androidx.cardview.widget.CardView>

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".quorabay.QuorabayModeratorActivity">
-    
     <androidx.drawerlayout.widget.DrawerLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,7 +20,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/quora_home_tool_bar"
+                android:id="@+id/quora_home_moderator_bar"
                 android:background="@color/quorabay_dark"
                 android:elevation="4dp"/>
             <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -44,7 +43,7 @@
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </LinearLayout>
         <com.google.android.material.navigation.NavigationView
-            android:id="@+id/quora_nav_view"
+            android:id="@+id/quora_nav_moderator_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:headerLayout="@layout/quorabay_nav_header"

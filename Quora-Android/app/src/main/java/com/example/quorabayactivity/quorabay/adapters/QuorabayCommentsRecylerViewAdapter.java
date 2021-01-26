@@ -44,7 +44,7 @@ public class QuorabayCommentsRecylerViewAdapter extends RecyclerView.Adapter<Quo
         CommentData comments = mCommentsList.get(position);
         Log.d("adapter", "onBindViewHolder: "+ mCommentsList.size());
         Log.d("adapter", "onBindViewHolder: "+ comments.getAnswerId());
-       // holder.tv_quorabay_comment_date.setText(comments.getDate());
+        //holder.tv_quorabay_comment_date.setText();
         holder.tv_quorabay_commentor_comment.setText(comments.getCommentText());
         holder.tv_quorabay_commentor_username.setText(comments.getUserId());
     }

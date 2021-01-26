@@ -8,7 +8,6 @@ public class RetrofitFollower {
     private static Retrofit instance;
 
     private RetrofitFollower(){
-
     }
 
     public static Retrofit getInstance(){

@@ -109,18 +109,15 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:text="Sports"/>
+
     </LinearLayout>
+
     <Button
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:id="@+id/quorabay_userProfile_editProfile"
-        android:background="@drawable/quorabay_btn_update"
-        android:text="Edit Profile"
-        android:backgroundTint="@color/quorabay_dark"
-        android:gravity="center"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center"
-        android:drawableLeft="@drawable/ic_baseline_edit_24"
-        android:textColor="@color/quorabay_text_color"/>
+        android:id="@+id/btn_quorabay_user_profile_follow"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="160dp"
+        android:text="Follow" />
 
 </LinearLayout>

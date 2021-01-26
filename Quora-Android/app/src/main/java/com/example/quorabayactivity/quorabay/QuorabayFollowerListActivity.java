@@ -33,7 +33,7 @@ public class QuorabayFollowerListActivity extends AppCompatActivity {
         Retrofit retrofit = RetrofitFollower.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
         List<UserDetails> userDetailsList = new ArrayList<>();
-        Call<List<UserDetails>> userFollowerCall = iPostAPI.getFollowersByUserId("u4");
+        Call<List<UserDetails>> userFollowerCall = iPostAPI.getFollowersByUserId("u2");
         userFollowerCall.enqueue(new Callback<List<UserDetails>>() {
             @Override
             public void onResponse(Call<List<UserDetails>> call, Response<List<UserDetails>> response) {

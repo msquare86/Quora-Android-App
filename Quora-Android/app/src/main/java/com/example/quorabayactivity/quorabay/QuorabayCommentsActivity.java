@@ -37,6 +37,7 @@ public class QuorabayCommentsActivity extends AppCompatActivity {
 
         Retrofit retrofit = RetrofitBuilder.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
+
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_comment_recycler_view);
         String answerId = (String) getIntent().getSerializableExtra("AnswerId");
         String answerText = (String) getIntent().getSerializableExtra("AnswerText");

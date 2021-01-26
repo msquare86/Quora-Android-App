@@ -4,14 +4,6 @@
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/quorabay_nav_moderator_list"
-            android:title="My Questions"
-            android:icon="@drawable/ic_quorabay_home"/>
-        <item
-            android:id="@+id/quorabay_nav_moderator_profile"
-            android:title="Approve Post"
-            android:icon="@drawable/ic_baseline_question_answer_24"/>
-        <item
             android:id="@+id/quorabay_nav_moderator_logout"
             android:title="Logout"
             android:icon="@drawable/ic_baseline_logout_24"/>

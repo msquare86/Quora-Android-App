@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:text="jan 23, 2021"
+                    android:hint="jan 23, 2021"
                     android:textColor="#000"
                     android:id="@+id/tv_quorabay_comment_date"/>
             </LinearLayout>

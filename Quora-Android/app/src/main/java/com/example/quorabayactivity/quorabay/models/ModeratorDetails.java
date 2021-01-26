@@ -17,4 +17,23 @@ public class ModeratorDetails {
 	public String getModeratorId(){
 		return moderatorId;
 	}
+
+	public ModeratorDetails() {
+	}
+
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public void setModeratorId(String moderatorId) {
+		this.moderatorId = moderatorId;
+	}
+
+	@Override
+	public String toString() {
+		return "ModeratorDetails{" +
+				"ownerId='" + ownerId + '\'' +
+				", moderatorId='" + moderatorId + '\'' +
+				'}';
+	}
 }

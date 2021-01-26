@@ -7,7 +7,10 @@ import com.example.quorabayactivity.quorabay.dto.PostComment;
 import com.example.quorabayactivity.quorabay.dto.PostReaction;
 import com.example.quorabayactivity.quorabay.models.Answers;
 import com.example.quorabayactivity.quorabay.models.Comments;
+import com.example.quorabayactivity.quorabay.models.CorporateDeatails;
 import com.example.quorabayactivity.quorabay.models.FollowRequest;
+import com.example.quorabayactivity.quorabay.models.ModeratorDetails;
+import com.example.quorabayactivity.quorabay.models.QuestionRequest;
 import com.example.quorabayactivity.quorabay.models.Questions;
 import com.example.quorabayactivity.quorabay.models.Reaction;
 import com.example.quorabayactivity.quorabay.models.User;
@@ -20,6 +23,7 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -108,7 +112,7 @@ public interface IPostAPI {
 
 // For Search ==========================================================================================
 
-    @GET("search/custom/{text}")
+    @GET("quora/search/custom/{text}")
     Call<List<UserSearch>> getAll(@Path("text") String text);
 
 //=================================================================================================
@@ -137,7 +141,7 @@ public interface IPostAPI {
 
 // For Followers =================================================================================================
 
-      @GET("quora/profile/{userId}")
+      @GET("quora/follower/{userId}")
       Call<List<UserDetails>> getFollowersByUserId (@Path("userId") String userId);
 
       @GET("quora/profile/pending/{userId}")
@@ -145,6 +149,12 @@ public interface IPostAPI {
 
       @POST("quora/profile/approve")
       Call<FollowRequest> approveFollowRequest(@Body FollowRequest followRequest);
+
+      @POST("quora/follower/addfollower")
+      Call<FollowRequest> addFollower(@Body FollowRequest followRequest);
+
+      @POST("quora/follower/checkfollowing")
+      Call<Boolean> checkFollowing(@Body FollowRequest followRequest);
 //=================================================================================================
 
 // For DataAnalytics=================================================================================================
@@ -152,5 +162,34 @@ public interface IPostAPI {
 
 //=================================================================================================
 
+// For Moderator=================================================================================================
+
+    @GET("quora/moderator/questionrequest/{corporateId}")
+    Call<List<QuestionRequest>> getApprovePostRequestById(@Path("corporateId") String corporateId);
+
+    @POST("quora/moderator/questionrequest/accept/{requestId}")
+    Call<Questions> getApprovePostAccept(@Path("requestId") String requestId);
+
+    @POST("quora/moderator/questionrequest/reject/{requestId}")
+    Call<Void> getApprovePostdecline(@Path("requestId") String requestId);
+
+    // Page
+
+    @GET("quora/moderator/getcorporatedetails/{moderatorId}")
+    Call<List<CorporateDeatails>> getPagesOfModerator(@Path("moderatorId") String moderatorId);
+
+    @POST("quora/moderator/add")
+    Call<ModeratorDetails> addmoderator (@Body ModeratorDetails moderatorDetails);
+
+//=================================================================================================
+
+// For Owner=================================================================================================
+
+    @GET("quora/moderator/getuserdetails/{ownerId}")
+    Call<List<UserDetails>> findModeratorListByownerId(@Path("ownerId") String ownerId);
+
+    @DELETE("quora/moderator/remove")
+    Call<ResponseBody> delelteModerator(ModeratorDetails moderatorDetails);
+//=================================================================================================
 
 }
