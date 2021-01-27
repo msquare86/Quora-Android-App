@@ -16,12 +16,13 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_quorabay_commentor_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="#000"
+                android:hint="userName"
                 android:text="username"
-                android:id="@+id/tv_quorabay_commentor_username"/>
+                android:textColor="#000"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"

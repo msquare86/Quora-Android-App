@@ -6,6 +6,11 @@
     <group android:checkableBehavior="single">
 
         <item
+            android:id="@+id/quorabay_nav_profile"
+            android:title="My Profile"
+            android:icon="@drawable/ic_baseline_person_24"/>
+
+        <item
             android:id="@+id/quorabay_nav_myquestions"
             android:title="My Questions"
             android:icon="@drawable/ic_quorabay_home"/>
@@ -31,11 +36,6 @@
             android:title="Sports"
             android:icon="@drawable/ic_quorabay_sports"/>
         <item
-            android:id="@+id/quorabay_nav_answers"
-            android:title="My Answers"
-            android:icon="@drawable/ic_baseline_question_answer_24"
-            />
-        <item
             android:id="@+id/quorabay_nav_followers"
             android:title="Followers"
             android:icon="@drawable/quorabay_follower"
@@ -44,9 +44,9 @@
             android:title="Follow Request"
             android:icon="@drawable/ic_baseline_person_add_24"
             />
-        <item android:id="@+id/quorabay_nav_notifications"
-            android:title="Notifications"
-            android:icon="@drawable/ic_baseline_notifications_24" />
+<!--        <item android:id="@+id/quorabay_nav_notifications"-->
+<!--            android:title="Notifications"-->
+<!--            android:icon="@drawable/ic_baseline_notifications_24" />-->
 
         <item
             android:id="@+id/quorabay_nav_logout"

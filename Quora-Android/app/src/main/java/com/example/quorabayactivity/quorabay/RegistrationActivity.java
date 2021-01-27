@@ -26,7 +26,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.builders.RetrofitBuilderCommon;
+import com.example.quorabayactivity.quorabay.builders.RetrofitFollower;
 import com.example.quorabayactivity.quorabay.models.DecodedJWTEntity;
+import com.example.quorabayactivity.quorabay.models.UserDetails;
 import com.example.quorabayactivity.quorabay.models.UserRegisterEntity;
 import com.example.quorabayactivity.quorabay.models.UserRegisterResponse;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
@@ -65,7 +67,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 101;
     private StorageReference mStorageRef;
     Uri imageFileUri;
-    String imageUrl;
+    String imageUrl = "https://uploads-ssl.webflow.com/5f72ebbe008321b20e82ee2a/5f86b992cee6a4510b2feadb_QB%20intro%20video%201-poster-00001.jpg";
     long mobileNumberLong = 0;
     int typeInt = 1;
     String notificationToken;
@@ -234,79 +236,113 @@ public class RegistrationActivity extends AppCompatActivity {
                                                             }
                                                             Log.d("TAG", msg);
                                                             Toast.makeText(RegistrationActivity.this, msg, Toast.LENGTH_SHORT).show();
+                                                            notificationToken = new String(msg);
+
+                                                            UserRegisterEntity userRegisterEntity = new UserRegisterEntity();
+                                                            StringBuilder areaOfInterestString = new StringBuilder();
+                                                            for (String areaInterest :
+                                                                    areaOfInterests) {
+                                                                areaOfInterestString.append(areaInterest + ",");
+                                                            }
+                                                            userRegisterEntity.setAreaOfInterests(areaOfInterestString.toString());
+                                                            userRegisterEntity.setBio(et_register_bio.getText().toString());
+                                                            userRegisterEntity.setChannelId(channelId);
+                                                            userRegisterEntity.setDateOfBirth(et_register_date_of_birth.getText().toString());
+                                                            userRegisterEntity.setEmail(et_register_email.getText().toString());
+                                                            userRegisterEntity.setMaster(false);
+                                                            userRegisterEntity.setMobileNumber(mobileNumberLong);
+                                                            userRegisterEntity.setName(et_register_name.getText().toString());
+                                                            userRegisterEntity.setNotificationToken(notificationToken);
+                                                            userRegisterEntity.setPassword(et_register_password.getText().toString());
+                                                            userRegisterEntity.setType(typeInt);
+                                                            userRegisterEntity.setUsername(et_register_username.getText().toString());
+                                                            userRegisterEntity.setProfileImage("link to image");
+
+                                                            Retrofit retrofit = RetrofitBuilderCommon.getInstance();
+                                                            IPostAPI iApiInterface = retrofit.create(IPostAPI.class);
+                                                            Call<UserRegisterResponse> apiCallRegisterUser = iApiInterface.register(userRegisterEntity);
+                                                            apiCallRegisterUser.enqueue(new Callback<UserRegisterResponse>() {
+                                                                @Override
+                                                                public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
+                                                                    Log.d("TAG", "onResponse: " + response.body().toString());
+                                                                    DecodedJWTEntity decodedJWTEntity = new DecodedJWTEntity();
+                                                                    try {
+                                                                        String[] split = response.body().getJwt().split("\\.");
+                                                                        Log.d("TAG", "onResponse: json object " + getJson(split[1]));
+                                                                        ObjectMapper objectMapper = new ObjectMapper();
+                                                                        decodedJWTEntity = objectMapper.readValue(getJson(split[1]).getBytes(), DecodedJWTEntity.class);
+                                                                        Log.d("TAG", "onResponse: " + decodedJWTEntity.getUserId());
+                                                                        // TODO: 27/01/21 check error code documentation and handle error accordingly
+
+                                                                        if(decodedJWTEntity.getCode() == 100) {
+                                                                            Toast.makeText(RegistrationActivity.this, "Email exist", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                        else if(decodedJWTEntity.getCode() == 101){
+                                                                            Toast.makeText(RegistrationActivity.this, "userName exist", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                        else if(decodedJWTEntity.getCode() == 102){
+                                                                            Toast.makeText(RegistrationActivity.this, "Password is null", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                        else if (decodedJWTEntity.getCode() == 103){
+                                                                            Toast.makeText(RegistrationActivity.this, "Email is not in proper format", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                        else if (response.body().getCode() == 0){
+                                                                            SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+                                                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                                            editor.putString("quorabayuserId", decodedJWTEntity.getUserId());
+                                                                            editor.putString("quorabayuserName" , decodedJWTEntity.getUsername());
+                                                                            editor.apply();
+                                                                            editor.commit();
+
+                                                                            // UserDetails;
+
+                                                                            UserDetails userDetails = new UserDetails();
+                                                                            userDetails.setUserId(decodedJWTEntity.getUserId());
+                                                                            userDetails.setProfileType(decodedJWTEntity.getType());
+                                                                            userDetails.setImageUrl(imageUrl);
+                                                                            userDetails.setRanking("Beginner");
+                                                                            userDetails.setUserName(decodedJWTEntity.getUsername());
+
+                                                                            Retrofit retrofit = RetrofitFollower.getInstance();
+                                                                            IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
+                                                                            Call<String> userCall = iPostAPI.saveUser(userDetails);
+
+                                                                            userCall.enqueue(new Callback<String>() {
+                                                                                @Override
+                                                                                public void onResponse(Call<String> call, Response<String> response) {
+                                                                                    if (response.body() != null){
+                                                                                        Toast.makeText(RegistrationActivity.this, "User Save", Toast.LENGTH_SHORT).show();
+                                                                                    }
+                                                                                }
+
+                                                                                @Override
+                                                                                public void onFailure(Call<String> call, Throwable t) {
+                                                                                    Log.d("Fail User Save", "onFailure: " + t);
+                                                                                }
+                                                                            });
+                                                                            Intent gotoHomePage = new Intent(RegistrationActivity.this , QuorabayHomeActivity.class);
+                                                                            gotoHomePage.putExtra("QuorabayUserId" , decodedJWTEntity.getUserId());
+                                                                            gotoHomePage.putExtra("QuorabayUserName" , decodedJWTEntity.getUsername());
+                                                                            gotoHomePage.putExtra("QuorabayUserEmail" , decodedJWTEntity.getEmail());
+                                                                            gotoHomePage.putExtra("QuorabayUserImage" , imageUrl);
+                                                                            startActivity(gotoHomePage);
+                                                                            // TODO: 25/1/21 add this user into your respective platform's microservice
+                                                                        }
+                                                                    } catch (Exception e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                    Log.d("TAG", "onResponse: " + decodedJWTEntity.getUserId());
+                                                                }
+
+                                                                @Override
+                                                                public void onFailure(Call<UserRegisterResponse> call, Throwable t) {
+                                                                    Log.d("TAG", "onFailure: " + t.getMessage());
+                                                                }
+                                                            });
+
                                                         }
                                                     });
 
-                                            UserRegisterEntity userRegisterEntity = new UserRegisterEntity();
-                                            StringBuilder areaOfInterestString = new StringBuilder();
-                                            for (String areaInterest :
-                                                    areaOfInterests) {
-                                                areaOfInterestString.append(areaInterest + ",");
-                                            }
-                                            userRegisterEntity.setAreaOfInterests(areaOfInterestString.toString());
-                                            userRegisterEntity.setBio(et_register_bio.getText().toString());
-                                            userRegisterEntity.setChannelId(channelId);
-                                            userRegisterEntity.setDateOfBirth(et_register_date_of_birth.getText().toString());
-                                            userRegisterEntity.setEmail(et_register_email.getText().toString());
-                                            userRegisterEntity.setMaster(false);
-                                            userRegisterEntity.setMobileNumber(mobileNumberLong);
-                                            userRegisterEntity.setName(et_register_name.getText().toString());
-                                            userRegisterEntity.setNotificationToken(notificationToken);
-                                            userRegisterEntity.setPassword(et_register_password.getText().toString());
-                                            userRegisterEntity.setType(typeInt);
-                                            userRegisterEntity.setUsername(et_register_username.getText().toString());
-                                            userRegisterEntity.setProfileImage("link to image");
-
-                                            Retrofit retrofit = RetrofitBuilderCommon.getInstance();
-                                            IPostAPI iApiInterface = retrofit.create(IPostAPI.class);
-                                            Call<UserRegisterResponse> apiCallRegisterUser = iApiInterface.register(userRegisterEntity);
-                                            apiCallRegisterUser.enqueue(new Callback<UserRegisterResponse>() {
-                                                @Override
-                                                public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
-                                                    Log.d("TAG", "onResponse: " + response.body().toString());
-                                                    DecodedJWTEntity decodedJWTEntity = new DecodedJWTEntity();
-                                                    try {
-                                                        String[] split = response.body().getJwt().split("\\.");
-                                                        Log.d("TAG", "onResponse: json object " + getJson(split[1]));
-                                                        ObjectMapper objectMapper = new ObjectMapper();
-                                                        decodedJWTEntity = objectMapper.readValue(getJson(split[1]).getBytes(), DecodedJWTEntity.class);
-                                                        Log.d("TAG", "onResponse: " + decodedJWTEntity.getUserId());
-                                                        // TODO: 27/01/21 check error code documentation and handle error accordingly
-
-                                                        if(decodedJWTEntity.getCode() == 100) {
-                                                            Toast.makeText(RegistrationActivity.this, "Email exist", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                        else if(decodedJWTEntity.getCode() == 101){
-                                                            Toast.makeText(RegistrationActivity.this, "userName exist", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                        else if(decodedJWTEntity.getCode() == 102){
-                                                            Toast.makeText(RegistrationActivity.this, "Password is null", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                        else if (decodedJWTEntity.getCode() == 103){
-                                                            Toast.makeText(RegistrationActivity.this, "Email is not in proper format", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                        else if (response.body().getCode() == 0){
-                                                            SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
-                                                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                                                            editor.putString("quorabayuserId", decodedJWTEntity.getUserId());
-                                                            editor.putString("quorabayuserName" , decodedJWTEntity.getUsername());
-                                                            editor.apply();
-                                                            editor.commit();
-                                                            Intent gotoHomePage = new Intent(RegistrationActivity.this , QuorabayHomeActivity.class);
-                                                            startActivity(gotoHomePage);
-                                                            // TODO: 25/1/21 add this user into your respective platform's microservice
-                                                        }
-                                                    } catch (Exception e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    Log.d("TAG", "onResponse: " + decodedJWTEntity.getUserId());
-                                                }
-
-                                                @Override
-                                                public void onFailure(Call<UserRegisterResponse> call, Throwable t) {
-                                                    Log.d("TAG", "onFailure: " + t.getMessage());
-                                                }
-                                            });
 
 //                                        }
 //                                    });

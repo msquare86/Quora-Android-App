@@ -11,9 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quorabayactivity.R;
+import com.example.quorabayactivity.quorabay.builders.RetrofitFollower;
 import com.example.quorabayactivity.quorabay.dto.CommentData;
+import com.example.quorabayactivity.quorabay.dto.ResponseMessage;
+import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class QuorabayCommentsRecylerViewAdapter extends RecyclerView.Adapter<QuorabayCommentsRecylerViewAdapter.ViewHolder> {
 
@@ -21,7 +29,7 @@ public class QuorabayCommentsRecylerViewAdapter extends RecyclerView.Adapter<Quo
     private final Context mContext;
     private final String answerId;
     private final String answerText;
-
+    private String userName = "quorabayUser";
     public QuorabayCommentsRecylerViewAdapter(List<CommentData> mCommentsList, Context mContext, String answerId, String answerText) {
         this.mCommentsList = mCommentsList;
         this.mContext = mContext;
@@ -39,11 +47,30 @@ public class QuorabayCommentsRecylerViewAdapter extends RecyclerView.Adapter<Quo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CommentData comments = mCommentsList.get(position);
-        Log.d("adapter", "onBindViewHolder: "+ mCommentsList.size());
-        Log.d("adapter", "onBindViewHolder: "+ comments.getAnswerId());
+
+        Retrofit retrofit = RetrofitFollower.getInstance();
+        IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
+
+        // TODO: 27/01/21 GetUserName
+        Call<ResponseMessage> getUserNameApiCall = iPostAPI.getUserNameByUserId(comments.getUserId());
+        getUserNameApiCall.enqueue(new Callback<ResponseMessage>() {
+            @Override
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                if (response.body() != null) {
+                    Log.d("XYZ", "onResponse: " + response.body().getMessage());
+                    userName = response.body().getMessage();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
+                Log.e("fail", "onFailure: " + t ) ;
+            }
+        });
+        Log.d("username", "onBindViewHolder: " + userName);
         holder.tv_quorabay_comment_date.setText("2021-01-27");
         holder.tv_quorabay_commentor_comment.setText(comments.getCommentText());
-        holder.tv_quorabay_commentor_username.setText(comments.getUserId());
+        holder.tv_quorabay_commentor_username.setText(userName);
     }
 
     @Override

@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:id="@+id/quorabay_userProfile_profileImage"
+            android:id="@+id/quorabay_userSearch_profileImage"
             android:src="@drawable/quorabay_profile_image" />
         <View
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Name"
-            android:id="@+id/quorabay_userProfile_fullName"
+            android:id="@+id/quorabay_userSearch_fullName"
             android:textStyle="bold"
             android:textColor="@color/quorabay_dark"
             android:textSize="18dp"
@@ -44,66 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:hint="Username"
-            android:id="@+id/quorabay_userPorfile_userName"
+            android:id="@+id/quorabay_userSearch_userName"
             android:textSize="18dp"
             android:textColor="@color/quorabay_light"
             />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:gravity="center_vertical"
-        android:layout_marginTop="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Post"
-            android:id="@+id/tv_quorabay_userProfile_post"
-            android:textStyle="bold"
-            android:textColor="@color/quorabay_dark"
-            android:textSize="18dp"
-            android:layout_marginLeft="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:hint="Numbers of Posts"
-            android:id="@+id/tv_quorabay_userPorfile_numbersofPosts"
-            android:textSize="18dp"
-            android:textColor="@color/quorabay_light"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:gravity="center_vertical"
-        android:layout_marginTop="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Followers"
-            android:id="@+id/tv_quorabay_userProfile_followers"
-            android:textStyle="bold"
-            android:textColor="@color/quorabay_dark"
-            android:textSize="18dp"
-            android:layout_marginLeft="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:hint="Numbers of Followers"
-            android:id="@+id/tv_quorabay_userPorfile_numbersofFollowers"
-            android:textSize="18dp"
-            android:textColor="@color/quorabay_light"
-            />
-    </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -162,5 +107,13 @@
             android:text="Sports"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_quorabay_user_search_follow"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="20dp"
+        android:text="Follow" />
 
 </LinearLayout>

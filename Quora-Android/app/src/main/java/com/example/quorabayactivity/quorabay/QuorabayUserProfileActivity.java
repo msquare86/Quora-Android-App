@@ -1,8 +1,6 @@
 package com.example.quorabayactivity.quorabay;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,11 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.quorabayactivity.R;
-import com.example.quorabayactivity.quorabay.builders.RetrofitFollower;
-import com.example.quorabayactivity.quorabay.models.FollowRequest;
-import com.example.quorabayactivity.quorabay.models.UserSearch;
+import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
-import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +25,7 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
     ImageView profileImage;
     TextView userName, email;
     Button follow;
+    String imageUrl;
 //    private Uri imageUri;
 //    private FirebaseStorage firebaseStorage;
 //    private StorageReference storageReference;
@@ -39,64 +35,57 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_user_profile);
 
-        Retrofit retrofit = RetrofitFollower.getInstance();
+        Retrofit retrofit = RetrofitBuilder.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
 
-        String user = (String) getIntent().getSerializableExtra("UserSearch");
-        Gson gson = new Gson();
+        String userId = getIntent().getStringExtra("QuorabayUserId");
+        String UserName = getIntent().getStringExtra("QuorabayUserName");
+        String userImage = getIntent().getStringExtra("QuorabayUserImage");
 
-        String userId = "u5";
-        UserSearch userSearch = gson.fromJson(user, UserSearch.class);
         profileImage = findViewById(quorabay_userProfile_profileImage);
         Glide.with(this)
-                .load(userSearch.getImageUrl())
+                .load(userImage)
                 .placeholder(R.drawable.quorabay_profile_image)
                 .into(profileImage);
 
 
         userName = findViewById(R.id.quorabay_userPorfile_userName);
-        userName.setText(userSearch.getUserName());
+        userName.setText(UserName);
 
-        FollowRequest followRequest = new FollowRequest();
-        followRequest.setUserId(userId);
-        followRequest.setFollowerId(userSearch.getUserId());
-        follow = findViewById(R.id.btn_quorabay_user_profile_follow);
-        Call<Boolean> followRequestCall = iPostAPI.checkFollowing(followRequest);
-        followRequestCall.enqueue(new Callback<Boolean>() {
+        Call<Integer> numbersofPostsApiCall = iPostAPI.getNumberOfPostsByUserId(userId);
+        TextView numberofPost = findViewById(R.id.tv_quorabay_userPorfile_numbersofPosts);
+        numbersofPostsApiCall.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (response.body() != null){
-                    if (response.body()){
-                        follow.setEnabled(false);
-                    }else{
-                        follow.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Call<FollowRequest> followRequestCall = iPostAPI.addFollower(followRequest);
-                                followRequestCall.enqueue(new Callback<FollowRequest>() {
-                                    @Override
-                                    public void onResponse(Call<FollowRequest> call, Response<FollowRequest> response) {
-                                        Toast.makeText(QuorabayUserProfileActivity.this, "Follow Request", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<FollowRequest> call, Throwable t) {
-                                        Log.d("fail", "onFailure: " + t);
-                                    }
-                                });
-                            }
-                        });
-                    }
+                    numberofPost.setText(String.valueOf(response.body().intValue()));
                 }
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                Log.e("fail", "onFailure: " + t );
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(QuorabayUserProfileActivity.this, "Fail Number Of Posts", Toast.LENGTH_SHORT).show();
             }
         });
 
+        TextView numberOfFollowers = findViewById(R.id.tv_quorabay_userPorfile_numbersofFollowers);
 
+        Call<Integer> numbersofFollowersApiCall = iPostAPI.getNumberOfFollowersByUserId(userId);
+
+        numbersofFollowersApiCall.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (response.body() != null){
+                    numberOfFollowers.setText(String.valueOf(response.body().intValue()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(QuorabayUserProfileActivity.this, "Fail Number of Followers", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 //        firebaseStorage = FirebaseStorage.getInstance();
 //        storageReference = firebaseStorage.getReference();

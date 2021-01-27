@@ -1,13 +1,13 @@
 package com.example.quorabayactivity.quorabay;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -39,15 +39,22 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
     private Toolbar toolbar;
     private FloatingActionButton floatingActionButton;
     private SearchView searchView;
-    private ClipData.Item logoutButton;
+    private String userId;
+    private String userName;
+    private String userEmail;
+    private String userImage;
+    //private SwipeRefreshLayout swipeRefreshLayout ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_home);
-
         floatingActionButton = findViewById(R.id.quorabay_fab);
         toolbar =  findViewById(R.id.quora_home_toolbar);
+
+
+        TextView tv_email = findViewById(R.id.quorabay_nav_header_email);
+        TextView quorabay_nav_header_username = findViewById(R.id.quorabay_nav_header_username);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("QuoraBay");
         NavigationView navigationView = findViewById(R.id.quora_nav_view);
@@ -57,10 +64,17 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
         quorabay_drawer_layout.addDrawerListener(toggle);
         toggle.syncState();
 
+        userId = getIntent().getStringExtra("QuorabayUserId");
+        userName = getIntent().getStringExtra("QuorabayUserName");
+        userEmail = getIntent().getStringExtra("QuorabayUserEmail");
+        userImage = getIntent().getStringExtra("QuorabayUserImage");
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(QuorabayHomeActivity.this, QuorabayPostQuestionActivity.class);
+                intent.putExtra("QuorabayUserId" , userId);
+                intent.putExtra("QuorabayUserName" , userName);
                 startActivity(intent);
             }
         });
@@ -73,20 +87,10 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
                 startActivity(intent);
             }
         });
-
-//        logoutButton = findViewById(R.id.quorabay_nav_logout);
-//        logoutButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //TODO: Go to Login Page
-//            }
-//        });
         List<Questions> questionsList = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.quorabay_recycler_view);
         Retrofit retrofit = RetrofitBuilder.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
-
-        // Api Call
         Call<List<Questions>> questionApiCall = iPostAPI.getQuestions();
         questionApiCall.enqueue(new Callback<List<Questions>>() {
             @Override
@@ -107,6 +111,7 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
                 Log.e("Fail", "onFailure: "+t );
             }
         });
+
     }
 
 
@@ -158,8 +163,29 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
                 Intent followRequest = new Intent(QuorabayHomeActivity.this , QuorabayUserFollowRequestActivity.class);
                 startActivity(followRequest);
                 break;
+
+            case R.id.quorabay_nav_logout:
+                Intent logout = new Intent(QuorabayHomeActivity.this , LoginActivity.class);
+                startActivity(logout);
+                break;
+
+            case R.id.quorabay_nav_myquestions:
+                Intent gotoQuestions = new Intent(QuorabayHomeActivity.this , QuorabayMyQuestionsActivity.class);
+                gotoQuestions.putExtra("QuorabayUserId" , userId);
+                gotoQuestions.putExtra("QuorabayUserName" , userName);
+                startActivity(gotoQuestions);
+                break;
+
+            case R.id.quorabay_nav_profile:
+                Intent gotoProfile = new Intent(QuorabayHomeActivity.this , QuorabayUserProfileActivity.class);
+                gotoProfile.putExtra("QuorabayUserId" , userId);
+                gotoProfile.putExtra("QuorabayUserName" , userName);
+                gotoProfile.putExtra("QuorabayUserImage" , userImage);
+                startActivity(gotoProfile);
+                break;
         }
         quorabay_drawer_layout.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

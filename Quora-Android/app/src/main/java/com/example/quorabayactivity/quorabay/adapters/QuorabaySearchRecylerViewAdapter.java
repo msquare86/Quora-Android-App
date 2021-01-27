@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.quorabayactivity.R;
-import com.example.quorabayactivity.quorabay.QuorabayUserProfileActivity;
+import com.example.quorabayactivity.quorabay.QuorabaySearchProfileActivity;
 import com.example.quorabayactivity.quorabay.models.UserSearch;
 import com.google.gson.Gson;
 
@@ -51,7 +51,7 @@ public class QuorabaySearchRecylerViewAdapter extends RecyclerView.Adapter<Quora
                 @Override
                 public void onClick(View v) {
                     Log.d("Item Click" , "Hello" );
-                    Intent intent = new Intent(mContext, QuorabayUserProfileActivity.class);
+                    Intent intent = new Intent(mContext, QuorabaySearchProfileActivity.class);
                     Gson gson = new Gson();
                     String usersearch = gson.toJson(userSearch);
                     intent.putExtra("UserSearch",  usersearch);

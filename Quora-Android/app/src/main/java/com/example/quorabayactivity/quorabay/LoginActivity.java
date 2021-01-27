@@ -14,8 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.builders.RetrofitBuilderCommon;
+import com.example.quorabayactivity.quorabay.builders.RetrofitFollower;
 import com.example.quorabayactivity.quorabay.models.DecodedJWTEntity;
 import com.example.quorabayactivity.quorabay.models.LoginSendCommonDTO;
+import com.example.quorabayactivity.quorabay.models.UserDetails;
 import com.example.quorabayactivity.quorabay.models.UserRegisterResponse;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     Button bt_login_register_user;
     String notificationToken;
     String userId;
-
+    String imageUrl = "https://uploads-ssl.webflow.com/5f72ebbe008321b20e82ee2a/5f86b992cee6a4510b2feadb_QB%20intro%20video%201-poster-00001.jpg";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,56 +100,100 @@ public class LoginActivity extends AppCompatActivity {
                                     String msg = getString(R.string.msg_token_fmt, notificationToken);
                                     Log.d("TAG", msg);
                                     Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
-                                }
-                            });
 
-                    Retrofit retrofit = RetrofitBuilderCommon.getInstance();
-                    IPostAPI iApiInterface = retrofit.create(IPostAPI.class);
-                    Call<UserRegisterResponse> apiCallRegisterUser = iApiInterface.loginUser(loginSendCommonDTO);
-                    apiCallRegisterUser.enqueue(new Callback<UserRegisterResponse>() {
-                        @Override
-                        public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
-                            Log.d("TAG", "onResponse: " + response.body().toString());
-                            DecodedJWTEntity decodedJWTEntity = new DecodedJWTEntity();
-                            try {
-                                String[] split = response.body().getJwt().split("\\.");
-                                Log.d("TAG", "onResponse: json object " + getJson(split[1]));
-                                ObjectMapper objectMapper = new ObjectMapper();
-                                decodedJWTEntity = objectMapper.readValue(getJson(split[1]).getBytes(), DecodedJWTEntity.class);
-                                Log.d("TAG", "onResponse: " + decodedJWTEntity.getUserId());
-
-                                // TODO: 25/1/21 add this user into your respective platform's microservice
+                                    notificationToken = new String(msg);
 
 
-
-                                if(decodedJWTEntity.getUserId() != null) {
-                                    Call<ResponseBody> apiCallAppendNotification = iApiInterface.appendNotification("userId", notificationToken);
-                                    apiCallAppendNotification.enqueue(new Callback<ResponseBody>() {
+                                    Retrofit retrofit = RetrofitBuilderCommon.getInstance();
+                                    IPostAPI iApiInterface = retrofit.create(IPostAPI.class);
+                                    Call<UserRegisterResponse> apiCallRegisterUser = iApiInterface.loginUser(loginSendCommonDTO);
+                                    apiCallRegisterUser.enqueue(new Callback<UserRegisterResponse>() {
                                         @Override
-                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                            // TODO: 25/1/21 START LANDING PAGE ACTIVITY
-                                            Intent gotoHomePage = new Intent(LoginActivity.this, QuorabayHomeActivity.class);
-                                            startActivity(gotoHomePage);
+                                        public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
+                                            if(response.body() != null) {
+
+
+                                                Log.d("TAG", "onResponse: " + response.body().toString());
+                                                DecodedJWTEntity decodedJWTEntity = new DecodedJWTEntity();
+                                                try {
+                                                    String[] split = response.body().getJwt().split("\\.");
+                                                    Log.d("TAG", "onResponse: json object " + getJson(split[1]));
+                                                    ObjectMapper objectMapper = new ObjectMapper();
+                                                    decodedJWTEntity = objectMapper.readValue(getJson(split[1]).getBytes(), DecodedJWTEntity.class);
+                                                    Log.d("TAG", "onResponse: " + decodedJWTEntity.getUserId());
+
+                                                    // TODO: 25/1/21 add this user into your respective platform's microservice
+
+
+                                                    if (decodedJWTEntity.getUserId() != null) {
+                                                        Call<ResponseBody> apiCallAppendNotification = iApiInterface.appendNotification("userId", notificationToken);
+                                                        DecodedJWTEntity finalDecodedJWTEntity = decodedJWTEntity;
+                                                        apiCallAppendNotification.enqueue(new Callback<ResponseBody>() {
+                                                            @Override
+                                                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                                                // TODO: 25/1/21 START LANDING PAGE ACTIVITY
+
+                                                                UserDetails userDetails = new UserDetails();
+                                                                Log.d("userId", "onResponse: " + finalDecodedJWTEntity.getUserId());
+                                                                userDetails.setUserId(finalDecodedJWTEntity.getUserId());
+                                                                userDetails.setProfileType(finalDecodedJWTEntity.getType());
+                                                                userDetails.setImageUrl(imageUrl);
+                                                                userDetails.setRanking("Beginner");
+                                                                userDetails.setUserName(finalDecodedJWTEntity.getUsername());
+
+                                                                Retrofit retrofit = RetrofitFollower.getInstance();
+                                                                IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
+                                                                Call<String> userCall = iPostAPI.saveUser(userDetails);
+
+                                                                userCall.enqueue(new Callback<String>() {
+                                                                    @Override
+                                                                    public void onResponse(Call<String> call, Response<String> response) {
+                                                                        if (response.body() != null){
+                                                                            Toast.makeText(LoginActivity.this, "User Save", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onFailure(Call<String> call, Throwable t) {
+                                                                        Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                });
+                                                                Intent gotoHomePage = new Intent(LoginActivity.this, QuorabayHomeActivity.class);
+
+                                                                gotoHomePage.putExtra("QuorabayUserId", finalDecodedJWTEntity.getUserId());
+                                                                gotoHomePage.putExtra("QuorabayUserName", finalDecodedJWTEntity.getUsername());
+                                                                gotoHomePage.putExtra("QuorabayUserEmail", finalDecodedJWTEntity.getEmail());
+                                                                gotoHomePage.putExtra("QuorabayUserImage", imageUrl);
+                                                                startActivity(gotoHomePage);
+                                                            }
+
+                                                            @Override
+                                                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                                                Log.d("TAG", "onFailure: " + t.getMessage());
+                                                            }
+                                                        });
+                                                    }
+
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                                Log.d("TAG", "onResponse: " + decodedJWTEntity.getUserId());
+
+                                            }else {
+                                                Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
 
                                         @Override
-                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                        public void onFailure(Call<UserRegisterResponse> call, Throwable t) {
                                             Log.d("TAG", "onFailure: " + t.getMessage());
                                         }
                                     });
+
+
                                 }
+                            });
 
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            Log.d("TAG", "onResponse: " + decodedJWTEntity.getUserId());
-                        }
-
-                        @Override
-                        public void onFailure(Call<UserRegisterResponse> call, Throwable t) {
-                            Log.d("TAG", "onFailure: " + t.getMessage());
-                        }
-                    });
 
                 }
 

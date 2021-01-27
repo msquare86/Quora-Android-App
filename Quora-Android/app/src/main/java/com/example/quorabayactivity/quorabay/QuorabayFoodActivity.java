@@ -28,6 +28,9 @@ public class QuorabayFoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_food);
 
+        String userId = getIntent().getStringExtra("QuorabayUserId");
+        String userName = getIntent().getStringExtra("QuorabayUserName");
+
         List<Questions> questionsList = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.quorabay_food_recycler_view);
 

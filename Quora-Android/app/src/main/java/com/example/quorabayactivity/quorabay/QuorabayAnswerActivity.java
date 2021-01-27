@@ -29,6 +29,7 @@ import retrofit2.Retrofit;
 
 public class QuorabayAnswerActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +37,6 @@ public class QuorabayAnswerActivity extends AppCompatActivity {
 
         List<Answers> answersList  = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_answer_recycler_view);
-
         Retrofit retrofit = RetrofitBuilder.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
         String questionId = (String) getIntent().getSerializableExtra("QuestionId");
@@ -84,5 +84,6 @@ public class QuorabayAnswerActivity extends AppCompatActivity {
                 });
             }
         });
+
     }
 }

@@ -5,6 +5,7 @@ import com.example.quorabayactivity.quorabay.dto.DataanalyticsPost;
 import com.example.quorabayactivity.quorabay.dto.PostAnswer;
 import com.example.quorabayactivity.quorabay.dto.PostComment;
 import com.example.quorabayactivity.quorabay.dto.PostReaction;
+import com.example.quorabayactivity.quorabay.dto.ResponseMessage;
 import com.example.quorabayactivity.quorabay.models.Answers;
 import com.example.quorabayactivity.quorabay.models.Comments;
 import com.example.quorabayactivity.quorabay.models.CorporateDeatails;
@@ -113,9 +114,6 @@ public interface IPostAPI {
     @GET ("quora/comment/comments/{answerId}")
     Call<List<CommentData>> getCommentByAnswerId (@Path("answerId") String answerId);
 
-//    @GET ("comment/answer/{answerId}")
-//    Call<>
-
     @GET ("quora/comment/user/{userId}")
      Call<User> getUsersByCommentId(@Path("userId") String userId);
 
@@ -172,9 +170,23 @@ public interface IPostAPI {
       Call<Boolean> checkFollowing(@Body FollowRequest followRequest);
 //=================================================================================================
 
-// For DataAnalytics=================================================================================================
+// For User=================================================================================================
+
+    @GET("quora/profile/user/getusername/{userId}")
+    Call<ResponseMessage> getUserNameByUserId(@Path("userId") String userId);
+
+    @POST("quora/profile/user")
+    Call<String> saveUser(@Body UserDetails userDetails);
+
+    @GET("quora/question/user/{userId}")
+    Call<List<Questions>> getAllQuestionsByUserId(@Path("userId") String userId);
 
 
+    @GET("quora/question/count/{userId}")
+    Call<Integer> getNumberOfPostsByUserId(@Path("userId") String userId);
+
+    @GET("quora/follower/countfollowers/{userId}")
+    Call<Integer> getNumberOfFollowersByUserId(@Path("userId") String userId);
 //=================================================================================================
 
 // For Moderator=================================================================================================

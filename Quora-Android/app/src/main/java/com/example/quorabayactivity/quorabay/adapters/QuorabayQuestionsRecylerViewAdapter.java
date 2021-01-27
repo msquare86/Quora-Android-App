@@ -14,19 +14,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.QuorabayAnswerActivity;
-import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
+import com.example.quorabayactivity.quorabay.builders.RetrofitFollower;
+import com.example.quorabayactivity.quorabay.dto.ResponseMessage;
 import com.example.quorabayactivity.quorabay.models.Questions;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<QuorabayQuestionsRecylerViewAdapter.ViewHolder> {
 
     private final List<Questions> mQuestionsList;
     private final Context mContext;
-
+    private String userName = "quorabayUser";
     public QuorabayQuestionsRecylerViewAdapter(List<Questions> mQuestionsList, Context mContext) {
         this.mQuestionsList = mQuestionsList;
         this.mContext = mContext;
@@ -41,17 +45,36 @@ public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<Qu
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         Questions questions = mQuestionsList.get(position);
-        String choice = "Technology";
+        String choice = "";
         if (questions.getCategory().getCategoryName() != null)
             choice = questions.getCategory().getCategoryName();
-        Log.d("cac", "onBindViewHolder: " + choice);
-        Retrofit retrofit = RetrofitBuilder.getInstance();
+
+        Retrofit retrofit = RetrofitFollower.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
-        Log.d("Cqtegory", "onBindViewHolder:" + choice) ;
+        Log.d("TAG", "onBindViewHolder: "+ questions.getUserId());
+
+        Log.d("question user Id", "onBindViewHolder: " + questions.getUserId());
+        Call<ResponseMessage> getUserNameApiCall = iPostAPI.getUserNameByUserId(questions.getUserId());
+        getUserNameApiCall.enqueue(new Callback<ResponseMessage>() {
+            @Override
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                if (response.body() != null) {
+                    Log.d("MNO", "onResponse: " + response.body().getMessage());
+                    userName = response.body().getMessage();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
+                Log.e("fail", "onFailure: " + t ) ;
+            }
+        });
+        Log.d("username", "onBindViewHolder: " + userName);
         holder.tv_post_questionText.setText(questions.getQuestionText());
         holder.tv_quorabay_post_asked_on.setText(questions.getDate().substring(0,10));
-        holder.tv_quorabay_post_asked.setText(questions.getUserId());
+        holder.tv_quorabay_post_asked.setText(userName);
         holder.tv_quorabay_post_topic.setText(choice);
 
         holder.answer.setOnClickListener(new View.OnClickListener() {

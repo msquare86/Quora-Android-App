@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quora"
+        android:text="QuoraBay"
         android:textSize="40sp"
         android:textStyle="bold"
         android:textColor="@color/quorabay_text_color"/>
@@ -29,7 +29,7 @@
         android:id="@+id/quorabay_nav_header_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Username"
+        android:text="Username"
         android:textColor="@color/quorabay_text_color"
         android:textSize="18sp"/>
 
@@ -37,7 +37,7 @@
         android:id="@+id/quorabay_nav_header_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Username@gmail.com"
+        android:text="email"
         android:textColor="@color/quorabay_text_color"
         android:textSize="18sp"/>
 

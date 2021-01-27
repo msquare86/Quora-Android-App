@@ -28,6 +28,9 @@ public class QuorabayMusicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_music);
 
+        String userId = getIntent().getStringExtra("QuorabayUserId");
+        String userName = getIntent().getStringExtra("QuorabayUserName");
+
         List<Questions> questionsList = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.quorabay_music_recycler_view);
 
