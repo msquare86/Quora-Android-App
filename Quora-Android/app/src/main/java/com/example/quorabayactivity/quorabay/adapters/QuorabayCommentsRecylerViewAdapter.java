@@ -29,9 +29,6 @@ public class QuorabayCommentsRecylerViewAdapter extends RecyclerView.Adapter<Quo
         this.answerText = answerText;
     }
 
-
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +41,7 @@ public class QuorabayCommentsRecylerViewAdapter extends RecyclerView.Adapter<Quo
         CommentData comments = mCommentsList.get(position);
         Log.d("adapter", "onBindViewHolder: "+ mCommentsList.size());
         Log.d("adapter", "onBindViewHolder: "+ comments.getAnswerId());
-        //holder.tv_quorabay_comment_date.setText();
+        holder.tv_quorabay_comment_date.setText("2021-01-27");
         holder.tv_quorabay_commentor_comment.setText(comments.getCommentText());
         holder.tv_quorabay_commentor_username.setText(comments.getUserId());
     }
@@ -57,7 +54,7 @@ public class QuorabayCommentsRecylerViewAdapter extends RecyclerView.Adapter<Quo
     public class ViewHolder extends RecyclerView.ViewHolder{
 
          TextView tv_quorabay_commentor_username;
-        TextView tv_quorabay_commentor_comment;
+         TextView tv_quorabay_commentor_comment;
          TextView tv_quorabay_comment_date;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

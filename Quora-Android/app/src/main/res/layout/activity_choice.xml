@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_theme_dark"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".quorabay.ChoiceActivity">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:clickable="true"
+        android:src="@drawable/pagebooklogo"
+        android:id="@+id/iv_choice_pagebook"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:text="Pagebook"
+        android:textColor="@color/textcolor"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        android:id="@+id/tv_choice_pagebook"/>
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:layout_marginTop="30dp"
+        android:clickable="true"
+        android:src="@drawable/quoralogo"
+        android:id="@+id/iv_choice_quora"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:text="Quora"
+        android:textColor="@color/textcolor"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        android:id="@+id/tv_choice_quora"/>
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:layout_marginTop="30dp"
+        android:clickable="true"
+        android:src="@drawable/quizlogo"
+        android:id="@+id/iv_choice_quiz"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:text="Quiz"
+        android:textColor="@color/textcolor"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        android:id="@+id/tv_choice_quiz"/>
+
+</LinearLayout>

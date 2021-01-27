@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1043038575395",
+    "project_id": "quorabay-753c4",
+    "storage_bucket": "quorabay-753c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043038575395:android:80eddc155a87ead9668a96",
+        "android_client_info": {
+          "package_name": "com.example.quorabayactivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043038575395-uu5vr6tbff22sq0vcl6gkuf2o2120pol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quorabayactivity",
+            "certificate_hash": "862b6a45da970da0a7f8a13304825c45d2fbbec3"
+          }
+        },
+        {
+          "client_id": "1043038575395-dokqt4us8gihsghjd8ve271ghkdufpgv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACEAvRw6EpYN6cJzLcNEIDXCSeNo3-QRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043038575395-dokqt4us8gihsghjd8ve271ghkdufpgv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

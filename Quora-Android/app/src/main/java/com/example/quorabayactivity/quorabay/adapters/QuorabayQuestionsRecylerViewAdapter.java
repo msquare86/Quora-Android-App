@@ -50,7 +50,7 @@ public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<Qu
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
         Log.d("Cqtegory", "onBindViewHolder:" + choice) ;
         holder.tv_post_questionText.setText(questions.getQuestionText());
-        holder.tv_quorabay_post_asked_on.setText( questions.getDate().substring(0,10));
+        holder.tv_quorabay_post_asked_on.setText(questions.getDate().substring(0,10));
         holder.tv_quorabay_post_asked.setText(questions.getUserId());
         holder.tv_quorabay_post_topic.setText(choice);
 

@@ -10,4 +10,7 @@
     <color name = "quorabay_light">#006499</color>
     <color name="quorabay_dark">#1b3752</color>
     <color name="quorabay_text_color">#b0cae5</color>
+    <color name="textcolor">#b0cae5</color>
+    <color name="bg_theme_light">#006499</color>
+    <color name="bg_theme_dark">#1b3752</color>
 </resources>

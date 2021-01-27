@@ -52,10 +52,8 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
         getSupportActionBar().setTitle("QuoraBay");
         NavigationView navigationView = findViewById(R.id.quora_nav_view);
         navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) QuorabayHomeActivity.this);
-
         quorabay_drawer_layout = findViewById(R.id.quorabay_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, quorabay_drawer_layout, toolbar, R.string.quora_navigation_drawer_open, R.string.quora_navigation_drawer_close);
-
         quorabay_drawer_layout.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -85,7 +83,6 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
 //        });
         List<Questions> questionsList = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.quorabay_recycler_view);
-
         Retrofit retrofit = RetrofitBuilder.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
 

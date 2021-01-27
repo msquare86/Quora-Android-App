@@ -104,7 +104,6 @@ public class QuorabayModeratorApprovePostRecylerViewAdapter extends RecyclerView
         Button btn_quorabay_moderator_approvePost_decline;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             tv_quorabay_moderator_approvePost_username = itemView.findViewById(R.id.tv_quorabay_moderator_approvePost_username);
             tv_quorabay_moderator_approvePost_business_page = itemView.findViewById(R.id.tv_quorabay_moderator_approvePost_business_page);
             tv_quorabay_moderator_approvePost_question = itemView.findViewById(R.id.tv_quorabay_moderator_approvePost_question);

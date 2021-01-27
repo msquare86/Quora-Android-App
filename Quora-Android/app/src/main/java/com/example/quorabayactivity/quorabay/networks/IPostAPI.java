@@ -9,6 +9,7 @@ import com.example.quorabayactivity.quorabay.models.Answers;
 import com.example.quorabayactivity.quorabay.models.Comments;
 import com.example.quorabayactivity.quorabay.models.CorporateDeatails;
 import com.example.quorabayactivity.quorabay.models.FollowRequest;
+import com.example.quorabayactivity.quorabay.models.LoginSendCommonDTO;
 import com.example.quorabayactivity.quorabay.models.ModeratorDetails;
 import com.example.quorabayactivity.quorabay.models.QuestionRequest;
 import com.example.quorabayactivity.quorabay.models.Questions;
@@ -16,6 +17,8 @@ import com.example.quorabayactivity.quorabay.models.Reaction;
 import com.example.quorabayactivity.quorabay.models.User;
 import com.example.quorabayactivity.quorabay.models.UserDetails;
 import com.example.quorabayactivity.quorabay.models.UserProfileData;
+import com.example.quorabayactivity.quorabay.models.UserRegisterEntity;
+import com.example.quorabayactivity.quorabay.models.UserRegisterResponse;
 import com.example.quorabayactivity.quorabay.models.UserSearch;
 
 import java.util.List;
@@ -32,6 +35,18 @@ import retrofit2.http.Path;
 public interface IPostAPI {
 
     // List of All APIS
+
+
+// For Login / Register ====================================================================================
+
+    @POST("/user/authenticate")
+    Call<UserRegisterResponse> loginUser(@Body LoginSendCommonDTO loginSendCommonDTO);
+
+    @POST("/user/save")
+    Call<UserRegisterResponse> register(@Body UserRegisterEntity userRegisterEntity);
+
+    @POST("/user/append/notification/{userId}")
+    Call<ResponseBody> appendNotification(@Path("userId") String userId, @Body String notificationToken);
 
 // For Question ====================================================================================
 

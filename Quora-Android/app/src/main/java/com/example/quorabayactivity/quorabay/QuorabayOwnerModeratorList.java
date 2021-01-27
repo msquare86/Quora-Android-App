@@ -30,11 +30,9 @@ public class QuorabayOwnerModeratorList extends AppCompatActivity {
 
         List<UserDetails> userDetailsList = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_owner_moderator_list_recycler_view);
-
         Retrofit retrofit = RetrofitFollower.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
 
-        // TODO code now
         String ownerId = "u6";
         Call<List<UserDetails>> userDetailsCall = iPostAPI.findModeratorListByownerId(ownerId);
         userDetailsCall.enqueue(new Callback<List<UserDetails>>() {
@@ -50,10 +48,9 @@ public class QuorabayOwnerModeratorList extends AppCompatActivity {
                     recyclerView.setAdapter(recyclerViewAdapter);
                 }
             }
-
             @Override
             public void onFailure(Call<List<UserDetails>> call, Throwable t) {
-
+                Log.e("fail moderator", "onFailure: "  + t );
             }
         });
     }

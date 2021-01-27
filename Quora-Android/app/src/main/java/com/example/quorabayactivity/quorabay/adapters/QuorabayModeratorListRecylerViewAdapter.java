@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,11 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.builders.RetrofitFollower;
+import com.example.quorabayactivity.quorabay.models.ModeratorDetails;
 import com.example.quorabayactivity.quorabay.models.UserDetails;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class QuorabayModeratorListRecylerViewAdapter extends RecyclerView.Adapter<QuorabayModeratorListRecylerViewAdapter.ViewHolder>{
@@ -56,29 +62,29 @@ public class QuorabayModeratorListRecylerViewAdapter extends RecyclerView.Adapte
                 .placeholder(R.drawable.quorabay_profile_image)
                 .into(holder.iv_quorabay_owner_moderator_userImage);
         Log.d("tag", "onBindViewHolder: "+ userSearch.getUserId() + ownerId);
-//        holder.btn_quorabay_owner_moderator_remove.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ModeratorDetails moderatorDetails = new ModeratorDetails();
-//                moderatorDetails.setModeratorId(userSearch.getUserId());
-//                moderatorDetails.setOwnerId(ownerId);
-//
-//                Log.d("TAG", "onClick: "+ moderatorDetails.getModeratorId());
-//
-//                Call<ResponseBody> deleteCall = iPostAPI.delelteModerator(moderatorDetails);
-//                deleteCall.enqueue(new Callback<ResponseBody>() {
-//                    @Override
-//                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                        Log.d("TAG", "onResponse: "+ response.body());
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                        Log.d("TAG", "onFailure: "+ t);
-//                    }
-//                });
-//            }
-//        });
+        holder.btn_quorabay_owner_moderator_remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "clicked", Toast.LENGTH_SHORT).show();
+                ModeratorDetails moderatorDetails = new ModeratorDetails();
+                moderatorDetails.setModeratorId(userSearch.getUserId());
+                moderatorDetails.setOwnerId(ownerId);
+                Log.d("TAG", "onClick: "+ moderatorDetails.getModeratorId());
+
+                Call<ResponseBody> deleteCall = iPostAPI.delelteModerator(moderatorDetails);
+                deleteCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.d("TAG", "onResponse: " + response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("TAG", "onResponse: " + t);
+                    }
+                });
+            }
+        });
     }
 
     @Override

@@ -140,7 +140,7 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-
+                Log.e("fail like ", "onFailure: " + t );
             }
         });
 
@@ -156,12 +156,9 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
             }
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-
+                Log.e("fail dislike", "onFailure: " + t );
             }
         });
-
-//        holder.tv_quorabay_answer_likes.setText(String.valueOf(like[0]));
-//        holder.tv_quorabay_answer_dislikes.setText(String.valueOf(dislike[0]));
     }
 
     @Override
@@ -179,6 +176,7 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
         private TextView tv_quorabay_answer_likes;
         private TextView tv_quorabay_answer_dislikes;
         private TextView tv_quorabay_answer_comment;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_quorabay_answer_answerBy = itemView.findViewById(R.id.tv_quorabay_answer_answerBy);

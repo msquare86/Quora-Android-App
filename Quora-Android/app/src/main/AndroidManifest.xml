@@ -3,6 +3,8 @@
     package="com.example.quorabayactivity">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -12,28 +14,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuorabayActivity"
         android:usesCleartextTraffic="true">
-        <activity android:name=".quorabay.QuorabayModeratorApprovePostActivity"></activity>
+        <activity android:name=".quorabay.RegistrationActivity">
+
+        </activity>
+        <activity android:name=".quorabay.LoginActivity" />
+        <activity android:name=".quorabay.ChoiceActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".quorabay.QuorabayModeratorApprovePostActivity" />
         <activity android:name=".quorabay.QuorabayOwnerModeratorList" />
         <activity android:name=".quorabay.QuorabaySearchModeratorActivity" />
         <activity android:name=".quorabay.QuorabayModeratorActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".quorabay.QuorabayUserFollowRequestActivity" />
         <activity android:name=".quorabay.QuorabayMyAnswersActivity" />
         <activity android:name=".quorabay.QuorabayMyQuestionsActivity" />
         <activity android:name=".quorabay.QuorabayFollowerListActivity" />
         <activity android:name=".quorabay.QuorabayOwnerHomeActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
-
-
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".quorabay.QuorabayUserProfileActivity" />
         <activity android:name=".quorabay.QuorabayAnswerActivity" />
@@ -53,13 +66,21 @@
         <activity android:name=".quorabay.QuorabayFoodActivity" />
         <activity android:name=".quorabay.QuorabayCommentsActivity" />
         <activity android:name=".quorabay.QuorabayPostQuestionActivity" />
-         <activity android:name=".quorabay.QuorabayHomeActivity">
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-         </activity>
+        <activity android:name=".quorabay.QuorabayHomeActivity">
+
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+        </activity>
         <activity android:name=".MainActivity" />
+        <service
+            android:name=".quorabay.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

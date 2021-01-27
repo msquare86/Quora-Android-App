@@ -24,8 +24,8 @@ public class QuorabayOwnerHomeActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_owner_home);
-
         moderatorlist = findViewById(R.id.tv_quorabay_owner_moderatorlist);
+
         moderatorlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -18,9 +18,6 @@ public class ModeratorDetails {
 		return moderatorId;
 	}
 
-	public ModeratorDetails() {
-	}
-
 	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
 	}
