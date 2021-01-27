@@ -141,6 +141,7 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
                 Intent gotoCommentPage = new Intent(mContext , QuorabayCommentsActivity.class);
                 gotoCommentPage.putExtra("AnswerId" , answers.getAnswerId());
                 gotoCommentPage.putExtra("AnswerText" , answers.getAnswerText());
+                gotoCommentPage.putExtra("QuorabayUserId" , answers.getUserId());
                 mContext.startActivity(gotoCommentPage);
             }
         });
@@ -151,6 +152,7 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
                 Intent gotoCommentPage = new Intent(mContext , QuorabayCommentsActivity.class);
                 gotoCommentPage.putExtra("AnswerId" , answers.getAnswerId());
                 gotoCommentPage.putExtra("AnswerText" , answers.getAnswerText());
+                gotoCommentPage.putExtra("QuorabayUserId" , answers.getUserId());
                 mContext.startActivity(gotoCommentPage);
             }
         });

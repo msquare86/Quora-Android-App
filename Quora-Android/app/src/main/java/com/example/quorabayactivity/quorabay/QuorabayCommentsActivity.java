@@ -41,6 +41,7 @@ public class QuorabayCommentsActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_comment_recycler_view);
         String answerId = (String) getIntent().getSerializableExtra("AnswerId");
         String answerText = (String) getIntent().getSerializableExtra("AnswerText");
+        String userId = getIntent().getStringExtra("QuorabayUserId");
         Log.d("ABC", "onCreate: " + answerId);
         List<CommentData> commentsList = new ArrayList<>();
         Call<List<CommentData>> responseBodyCall = iPostAPI.getCommentByAnswerId(answerId);
@@ -73,7 +74,7 @@ public class QuorabayCommentsActivity extends AppCompatActivity {
                 PostComment postComment = new PostComment();
                 Log.d("postComment", "onClick: " + editText.getText().toString());
                 postComment.setCommentText(editText.getText().toString());
-                postComment.setUserId("mm");
+                postComment.setUserId(userId);
                 postComment.setAnswerId(answerId);
                 //postComment.setParentId("aass");
                 Call<ResponseBody> responseBodyCall1 = iPostAPI.createComment(postComment);

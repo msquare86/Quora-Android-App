@@ -1,5 +1,6 @@
 package com.example.quorabayactivity.quorabay;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +30,7 @@ public class QuorabaySearchProfileActivity extends AppCompatActivity {
     TextView userName, email;
     Button follow;
     String imageUrl;
-
+    TextView logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +90,17 @@ public class QuorabaySearchProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
                 Log.e("fail", "onFailure: " + t );
+            }
+        });
+
+        logout = findViewById(R.id.tv_quorabay_user_search_logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoLoginPage = new Intent(QuorabaySearchProfileActivity.this , LoginActivity.class);
+                gotoLoginPage.putExtra("channelId" , 1);
+                gotoLoginPage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(gotoLoginPage);
             }
         });
     }

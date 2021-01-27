@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.QuorabayUserProfileActivity;
 import com.example.quorabayactivity.quorabay.models.UserDetails;
-import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -51,9 +50,9 @@ public class QuorabayUserFollowersRecylerViewAdapter extends RecyclerView.Adapte
             public void onClick(View v) {
                 Log.d("Item Click" , "Hello" );
                 Intent intent = new Intent(mContext, QuorabayUserProfileActivity.class);
-                Gson gson = new Gson();
-                String user = gson.toJson(userDetails);
-                intent.putExtra("UserSearch",  user);
+                intent.putExtra("QuorabayUserId" , userDetails.getUserName());
+                intent.putExtra("QuorabayUserName" , userDetails.getUserName());
+                intent.putExtra("QuorabayUserImage" , userDetails.getImageUrl());
                 mContext.startActivity(intent);
             }
         });

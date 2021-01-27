@@ -2,14 +2,12 @@ package com.example.quorabayactivity.quorabay.dto;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ResponseMessage {
+import java.io.Serializable;
+
+public class ResponseMessage implements Serializable {
 
     @SerializedName("message")
     private String message;
-
-    public ResponseMessage(String message) {
-        this.message = message;
-    }
 
     public String getMessage() {
         return message;

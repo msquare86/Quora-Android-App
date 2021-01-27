@@ -156,6 +156,7 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
 
             case R.id.quorabay_nav_followers:
                 Intent followers = new Intent(QuorabayHomeActivity.this , QuorabayFollowerListActivity.class);
+                followers.putExtra("QuorabayUserId" , userId);
                 startActivity(followers);
                 break;
 
@@ -166,6 +167,8 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
 
             case R.id.quorabay_nav_logout:
                 Intent logout = new Intent(QuorabayHomeActivity.this , LoginActivity.class);
+                logout.putExtra("channelId" , 1);
+                logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(logout);
                 break;
 

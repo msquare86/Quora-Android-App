@@ -1,6 +1,9 @@
 package com.example.quorabayactivity.quorabay;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
+import com.example.quorabayactivity.quorabay.dto.ResponseMessage;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 
 import retrofit2.Call;
@@ -26,6 +30,7 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
     TextView userName, email;
     Button follow;
     String imageUrl;
+    TextView logout;
 //    private Uri imageUri;
 //    private FirebaseStorage firebaseStorage;
 //    private StorageReference storageReference;
@@ -70,23 +75,33 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
 
         TextView numberOfFollowers = findViewById(R.id.tv_quorabay_userPorfile_numbersofFollowers);
 
-        Call<Integer> numbersofFollowersApiCall = iPostAPI.getNumberOfFollowersByUserId(userId);
-
-        numbersofFollowersApiCall.enqueue(new Callback<Integer>() {
+        Call<ResponseMessage> numbersofFollowersApiCall = iPostAPI.getNumberOfFollowersByUserId(userId);
+        numbersofFollowersApiCall.enqueue(new Callback<ResponseMessage>() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
                 if (response.body() != null){
-                    numberOfFollowers.setText(String.valueOf(response.body().intValue()));
+                    Log.d("follower", "onResponse: " + response.body().getMessage());
+                    numberOfFollowers.setText(response.body().getMessage());
+                }else{
+                    numberOfFollowers.setText("0");
                 }
             }
-
             @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
-                Toast.makeText(QuorabayUserProfileActivity.this, "Fail Number of Followers", Toast.LENGTH_SHORT).show();
-
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
+                Toast.makeText(QuorabayUserProfileActivity.this, "failFollower", Toast.LENGTH_SHORT).show();
             }
         });
 
+        logout = findViewById(R.id.tv_quorabay_user_profile_logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoLogout = new Intent(QuorabayUserProfileActivity.this , LoginActivity.class);
+                gotoLogout.putExtra("channelId" , 1);
+                gotoLogout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(gotoLogout);
+            }
+        });
 //        firebaseStorage = FirebaseStorage.getInstance();
 //        storageReference = firebaseStorage.getReference();
 //        profileImage.setOnClickListener(new View.OnClickListener() {

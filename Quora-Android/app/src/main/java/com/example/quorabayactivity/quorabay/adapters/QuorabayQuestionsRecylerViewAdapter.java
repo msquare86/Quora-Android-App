@@ -53,13 +53,13 @@ public class QuorabayQuestionsRecylerViewAdapter extends RecyclerView.Adapter<Qu
 
         Retrofit retrofit = RetrofitFollower.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
-        Log.d("TAG", "onBindViewHolder: "+ questions.getUserId());
 
         Log.d("question user Id", "onBindViewHolder: " + questions.getUserId());
         Call<ResponseMessage> getUserNameApiCall = iPostAPI.getUserNameByUserId(questions.getUserId());
         getUserNameApiCall.enqueue(new Callback<ResponseMessage>() {
             @Override
             public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                Log.d("TAG", "onResponse: "+ response.body().getMessage());
                 if (response.body() != null) {
                     Log.d("MNO", "onResponse: " + response.body().getMessage());
                     userName = response.body().getMessage();

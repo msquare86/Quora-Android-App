@@ -34,9 +34,12 @@ import com.example.quorabayactivity.quorabay.models.UserRegisterResponse;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -186,17 +189,17 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
                 else {
 
-//                    mStorageRef = FirebaseStorage.getInstance().getReference();
-//                    StorageReference storageReference = mStorageRef.child("images/"+email);
-//                    storageReference.putFile(imageFileUri)
-//                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                                @Override
-//                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                    Task<Uri> downloadUrl = taskSnapshot.getStorage().getDownloadUrl();
-//                                    downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                        @Override
-//                                        public void onSuccess(Uri uri) {
-//                                            imageUrl = uri.toString();
+                    mStorageRef = FirebaseStorage.getInstance().getReference();
+                    StorageReference storageReference = mStorageRef.child("images/"+email);
+                    storageReference.putFile(imageFileUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Task<Uri> downloadUrl = taskSnapshot.getStorage().getDownloadUrl();
+                                    downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            imageUrl = uri.toString();
                                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                                 // Create channel to show notifications.
                                                 String channelId  = getString(R.string.default_notification_channel_id);
@@ -223,19 +226,6 @@ public class RegistrationActivity extends AppCompatActivity {
                                                             String msg = getString(R.string.msg_token_fmt, notificationToken);
                                                             Log.d("TAG", msg);
                                                             Toast.makeText(RegistrationActivity.this, msg, Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-
-                                            FirebaseMessaging.getInstance().subscribeToTopic("all")
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            String msg = getString(R.string.msg_subscribed);
-                                                            if (!task.isSuccessful()) {
-                                                                msg = getString(R.string.msg_subscribe_failed);
-                                                            }
-                                                            Log.d("TAG", msg);
-                                                            Toast.makeText(RegistrationActivity.this, msg, Toast.LENGTH_SHORT).show();
                                                             notificationToken = new String(msg);
 
                                                             UserRegisterEntity userRegisterEntity = new UserRegisterEntity();
@@ -256,7 +246,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                                             userRegisterEntity.setPassword(et_register_password.getText().toString());
                                                             userRegisterEntity.setType(typeInt);
                                                             userRegisterEntity.setUsername(et_register_username.getText().toString());
-                                                            userRegisterEntity.setProfileImage("link to image");
+                                                            userRegisterEntity.setProfileImage(imageUrl);
 
                                                             Retrofit retrofit = RetrofitBuilderCommon.getInstance();
                                                             IPostAPI iApiInterface = retrofit.create(IPostAPI.class);
@@ -343,14 +333,23 @@ public class RegistrationActivity extends AppCompatActivity {
                                                         }
                                                     });
 
+                                            FirebaseMessaging.getInstance().subscribeToTopic("all")
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            String msg = getString(R.string.msg_subscribed);
+                                                            if (!task.isSuccessful()) {
+                                                                msg = getString(R.string.msg_subscribe_failed);
+                                                            }
+                                                            Log.d("TAG", msg);
+                                                            Toast.makeText(RegistrationActivity.this, msg, Toast.LENGTH_SHORT).show();
 
-//                                        }
-//                                    });
-//                                }
-//                            });
-
-
-
+                                                        }
+                                                    });
+                                        }
+                                    });
+                                }
+                            });
                 }
             }
         });

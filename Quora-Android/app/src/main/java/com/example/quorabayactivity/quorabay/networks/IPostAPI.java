@@ -186,7 +186,7 @@ public interface IPostAPI {
     Call<Integer> getNumberOfPostsByUserId(@Path("userId") String userId);
 
     @GET("quora/follower/countfollowers/{userId}")
-    Call<Integer> getNumberOfFollowersByUserId(@Path("userId") String userId);
+    Call<ResponseMessage> getNumberOfFollowersByUserId(@Path("userId") String userId);
 //=================================================================================================
 
 // For Moderator=================================================================================================
