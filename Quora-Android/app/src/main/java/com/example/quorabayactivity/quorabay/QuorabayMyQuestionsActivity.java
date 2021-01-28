@@ -33,7 +33,7 @@ public class QuorabayMyQuestionsActivity extends AppCompatActivity {
         //String userName = getIntent().getStringExtra("QuorbayUserName");
         SharedPreferences sharedPreferences = getSharedPreferences(getPackageName() , MODE_PRIVATE);
 
-        String userId = sharedPreferences.getString("QuorabayUserId" , "quorabayUserId");
+        String userId = sharedPreferences.getString("QuorabayUserId" , "31b6aa8d-a1f8-4845-a9f4-046f326064d7");
         List<Questions> questionsList = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_my_questions_recycler_view);
         Retrofit retrofit = RetrofitBuilder.getInstance();

@@ -15,9 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
+import com.example.quorabayactivity.quorabay.builders.RetrofitBuilderCommon;
 import com.example.quorabayactivity.quorabay.builders.RetrofitFollower;
 import com.example.quorabayactivity.quorabay.dto.ResponseMessage;
+import com.example.quorabayactivity.quorabay.models.User;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +38,9 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
     String imageUrl;
     TextView logout;
     TextView level;
+    String interest;
+    //List<String> areaofInterest;
+
 //    private Uri imageUri;
 //    private FirebaseStorage firebaseStorage;
 //    private StorageReference storageReference;
@@ -46,17 +53,40 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
         Retrofit retrofit = RetrofitBuilder.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
 
-        String userId = getIntent().getStringExtra("QuorabayUserId");
-        String UserName = getIntent().getStringExtra("QuorabayUserName");
-        String userImage = getIntent().getStringExtra("QuorabayUserImage");
+//        String userId = getIntent().getStringExtra("QuorabayUserId");
+//        String UserName = getIntent().getStringExtra("QuorabayUserName");
+//        String userImage = getIntent().getStringExtra("QuorabayUserImage");
+
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+        String userId = sharedPreferences.getString("QuorabayUserId" , "quorabayUserId");
+        String UserName = sharedPreferences.getString("QuorabayUserName" , "quorabayUserId");
+        String userImage = sharedPreferences.getString("QuorabayUserImage" , "quorabayUserId");
+
+        Retrofit retrofit2 = RetrofitBuilderCommon.getInstance();
+        IPostAPI iPostAPI2 = retrofit2.create(IPostAPI.class);
+        Call<User> userCall = iPostAPI2.getUser(2 , userId);
+
+        userCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.body() != null){
+                    interest = response.body().getAreaOfInterests();
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(QuorabayUserProfileActivity.this, "Fail Get User", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        List<String> areaofInterest = Arrays.asList(interest.split(","));
+//        PrintAreaofInterest(areaofInterest);
 
         profileImage = findViewById(quorabay_userProfile_profileImage);
         Glide.with(this)
                 .load(userImage)
                 .placeholder(R.drawable.quorabay_profile_image)
                 .into(profileImage);
-
-
         userName = findViewById(R.id.quorabay_userPorfile_userName);
         userName.setText(UserName);
 
@@ -97,9 +127,6 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
-
-
         logout = findViewById(R.id.tv_quorabay_user_profile_logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,22 +149,6 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
 
         level = findViewById(R.id.tv_quorabay_userPorfile_setLevel);
 
-//        Call<String> levelApiCall = iPostAPI1.findRanking(userId);
-//        levelApiCall.enqueue(new Callback<String>() {
-//            @Override
-//            public void onResponse(Call<String> call, Response<String> response) {
-//                if (response.body() != null){
-//                    Log.d("level", "onResponse: " + response.body());
-//                    level.setText(response.body());
-//                }else{
-//                    level.setText("beginner");
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<String> call, Throwable t) {
-//                Log.e("LevelFail", "onFailure: " + t.getMessage() );
-//            }
-//        });
          Call<ResponseMessage> apiCall = iPostAPI1.findRanking(userId);
          apiCall.enqueue(new Callback<ResponseMessage>() {
              @Override
@@ -151,6 +162,7 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
                  Log.d("LevelFail", "onFailure: " + t.getMessage());
              }
          });
+
 //        firebaseStorage = FirebaseStorage.getInstance();
 //        storageReference = firebaseStorage.getReference();
 //        profileImage.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +171,64 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
 //                choosePicture();
 //            }
 //        });
+    }
+
+    private void PrintAreaofInterest(List<String> areaofInterest) {
+        if (areaofInterest.size() == 0){
+
+        }else if (areaofInterest.size() == 1){
+            TextView textView = findViewById(R.id.tv_quorabay_user_profile_1);
+            textView.setText(areaofInterest.get(1));
+        }
+        else if (areaofInterest.size() == 2){
+            TextView textView = findViewById(R.id.tv_quorabay_user_profile_1);
+            textView.setText(areaofInterest.get(1));
+
+            TextView textView1 = findViewById(R.id.tv_quorabay_user_profile_1);
+            textView1.setText(areaofInterest.get(2));
+        }
+        else if (areaofInterest.size() == 3){
+            TextView textView = findViewById(R.id.tv_quorabay_user_profile_1);
+            textView.setText(areaofInterest.get(1));
+
+            TextView textView1 = findViewById(R.id.tv_quorabay_user_profile_1);
+            textView1.setText(areaofInterest.get(2));
+
+            TextView textView2 = findViewById(R.id.tv_quorabay_user_profile_1);
+            textView2.setText(areaofInterest.get(3));
+        }
+        else if (areaofInterest.size() == 4){
+            TextView textView = findViewById(R.id.tv_quorabay_user_profile_1);
+            textView.setText(areaofInterest.get(1));
+
+            TextView textView1 = findViewById(R.id.tv_quorabay_user_profile_2);
+            textView1.setText(areaofInterest.get(1));
+
+            TextView textView2 = findViewById(R.id.tv_quorabay_user_profile_3);
+            textView2.setText(areaofInterest.get(2));
+
+            TextView textView3 = findViewById(R.id.tv_quorabay_user_profile_4);
+            textView3.setText(areaofInterest.get(3));
+
+
+        }else if (areaofInterest.size() == 5){
+            TextView textView = findViewById(R.id.tv_quorabay_user_profile_1);
+            textView.setText(areaofInterest.get(1));
+
+            TextView textView1 = findViewById(R.id.tv_quorabay_user_profile_2);
+            textView1.setText(areaofInterest.get(1));
+
+            TextView textView2 = findViewById(R.id.tv_quorabay_user_profile_3);
+            textView2.setText(areaofInterest.get(2));
+
+            TextView textView3 = findViewById(R.id.tv_quorabay_user_profile_4);
+            textView3.setText(areaofInterest.get(3));
+
+            TextView textView4 = findViewById(R.id.tv_quorabay_user_profile_5);
+            textView4.setText(areaofInterest.get(4));
+
+
+        }
     }
 
 //    private void choosePicture() {

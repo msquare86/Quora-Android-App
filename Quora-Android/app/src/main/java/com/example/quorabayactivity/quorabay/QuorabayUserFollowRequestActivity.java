@@ -1,5 +1,7 @@
 package com.example.quorabayactivity.quorabay;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -29,7 +31,14 @@ public class QuorabayUserFollowRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_user_follow_request);
 
-        String userId = getIntent().getStringExtra("QuorabayUserId");
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName() , Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("QuorabayUserId" , "31b6aa8d-a1f8-4845-a9f4-046f326064d7");
+
+        //String userId = getIntent().getStringExtra("QuorabayUserId");
+        // String userName = getIntent().getStringExtra("QuorabayUserName");
+        String userName = sharedPreferences.getString("QuorabayUserName" , "quorabayUser");
+
+        //String userId = getIntent().getStringExtra("QuorabayUserId");
         Log.d("MNOP", "onCreate: " + userId);
         FollowRequest followRequest  = new FollowRequest();
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_userfollow_request);

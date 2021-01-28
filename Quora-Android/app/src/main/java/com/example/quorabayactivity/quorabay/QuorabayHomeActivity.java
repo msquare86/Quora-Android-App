@@ -1,6 +1,7 @@
 package com.example.quorabayactivity.quorabay;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.adapters.QuorabayQuestionsRecylerViewAdapter;
 import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
+import com.example.quorabayactivity.quorabay.builders.RetrofitData;
 import com.example.quorabayactivity.quorabay.models.Questions;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -64,18 +66,23 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
         quorabay_drawer_layout.addDrawerListener(toggle);
         toggle.syncState();
 
-        userId = getIntent().getStringExtra("QuorabayUserId");
-        userName = getIntent().getStringExtra("QuorabayUserName");
-        userEmail = getIntent().getStringExtra("QuorabayUserEmail");
-        userImage = getIntent().getStringExtra("QuorabayUserImage");
+//        userId = getIntent().getStringExtra("QuorabayUserId");
+//        userName = getIntent().getStringExtra("QuorabayUserName");
+//        userEmail = getIntent().getStringExtra("QuorabayUserEmail");
+//        userImage = getIntent().getStringExtra("QuorabayUserImage");
 
-        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("QuorabayUserId" , userId);
-        editor.putString("QuorabayUserName" , userName);
-        editor.putString("QuorabayUserEmail" , userEmail);
-        editor.apply();
-        editor.commit();
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName() , Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("QuorabayUserId" , "31b6aa8d-a1f8-4845-a9f4-046f326064d7");
+        String userName = sharedPreferences.getString("QuorabayUserName" , "quorabayUser");
+        String userEmail = sharedPreferences.getString("QuorabayUserEmail" , "mananpatel898@gmail.com");
+
+//        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString("QuorabayUserId" , userId);
+//        editor.putString("QuorabayUserName" , userName);
+//        editor.putString("QuorabayUserEmail" , userEmail);
+//        editor.apply();
+//        editor.commit();
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,6 +194,23 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
                 editor.commit();
                 logout.putExtra("channelId" , 1);
                 logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                Retrofit retrofit1 = RetrofitData.getInstance();
+                IPostAPI iPostAPI1 = retrofit1.create(IPostAPI.class);
+
+                Call<Void> sendToData = iPostAPI1.sendtodata(1 , userId);
+
+                sendToData.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
                 startActivity(logout);
                 break;
 

@@ -179,7 +179,6 @@ public interface IPostAPI {
     @POST("quora/profile/user")
     Call<String> saveUser(@Body UserDetails userDetails);
 
-    // TODO: 28/01/21 check not hitted 
     @GET("quora/question/user/{userId}")
     Call<List<Questions>> getAllQuestionsByUserId(@Path("userId") String userId);
 
@@ -189,6 +188,10 @@ public interface IPostAPI {
 
     @GET("quora/follower/countfollowers/{userId}")
     Call<ResponseMessage> getNumberOfFollowersByUserId(@Path("userId") String userId);
+
+    @GET("user/findByChannelIdAndUsername/{channelId}/{userId}")
+    Call<User> getUser(@Path("channelId") int channelId , @Path("userId") String userId);
+
 //=================================================================================================
 
 // For Moderator=================================================================================================
@@ -220,5 +223,8 @@ public interface IPostAPI {
     @DELETE("quora/moderator/remove")
     Call<ResponseBody> delelteModerator(ModeratorDetails moderatorDetails);
 //=================================================================================================
+
+    @GET("analytics/logoutuser/{channelId}/{userId}")
+    Call<Void> sendtodata(@Path("channelId") int channelId , @Path("userId") String userId);
 
 }

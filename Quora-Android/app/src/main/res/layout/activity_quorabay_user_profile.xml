@@ -183,41 +183,46 @@
         android:orientation="vertical"
         android:layout_gravity="center"
         android:gravity="center_horizontal">
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textAlignment="center"-->
+<!--            android:text="Interest"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textColor="@color/quorabay_dark"-->
+<!--            android:layout_gravity="center"/>-->
         <TextView
+            android:id="@+id/tv_quorabay_user_profile_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Interest"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="@color/quorabay_dark"
-            android:layout_gravity="center"/>
+            />
         <TextView
+            android:id="@+id/tv_quorabay_user_profile_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Technology"/>
+            />
         <TextView
+            android:id="@+id/tv_quorabay_user_profile_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Music"/>
+            />
         <TextView
+            android:id="@+id/tv_quorabay_user_profile_4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Food"/>
+            />
         <TextView
+            android:id="@+id/tv_quorabay_user_profile_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Entertainment"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Sports"/>
+            />
 
     </LinearLayout>
 

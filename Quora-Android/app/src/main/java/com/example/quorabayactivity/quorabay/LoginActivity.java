@@ -1,6 +1,7 @@
 package com.example.quorabayactivity.quorabay;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -166,6 +167,14 @@ public class LoginActivity extends AppCompatActivity {
                                                                     gotoHomePage.putExtra("QuorabayUserName", finalDecodedJWTEntity.getUsername());
                                                                     gotoHomePage.putExtra("QuorabayUserEmail", finalDecodedJWTEntity.getEmail());
                                                                     gotoHomePage.putExtra("QuorabayUserImage", imageUrl);
+
+                                                                    SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+                                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                                    editor.putString("QuorabayUserId" , finalDecodedJWTEntity.getUserId());
+                                                                    editor.putString("QuorabayUserName" , finalDecodedJWTEntity.getUsername());
+                                                                    editor.putString("QuorabayUserEmail" , finalDecodedJWTEntity.getEmail());
+                                                                    editor.apply();
+                                                                    editor.commit();
                                                                     startActivity(gotoHomePage);
                                                                 }else{
                                                                     Intent gotoOwnerPage = new Intent(LoginActivity.this , QuorabayOwnerHomeActivity.class);

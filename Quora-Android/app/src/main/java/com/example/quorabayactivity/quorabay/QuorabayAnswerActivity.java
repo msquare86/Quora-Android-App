@@ -38,7 +38,7 @@ public class QuorabayAnswerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quorabay_answer);
 
         SharedPreferences sharedPreferences = getSharedPreferences(getPackageName() , Context.MODE_PRIVATE);
-        String userId = sharedPreferences.getString("QuorabayUserId" , "QuorabayUser");
+        String userId = sharedPreferences.getString("QuorabayUserId" , "31b6aa8d-a1f8-4845-a9f4-046f326064d7");
 
         List<Answers> answersList  = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_answer_recycler_view);

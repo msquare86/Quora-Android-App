@@ -1,5 +1,7 @@
 package com.example.quorabayactivity.quorabay;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,7 +43,12 @@ public class QuorabayCommentsActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_comment_recycler_view);
         String answerId = (String) getIntent().getSerializableExtra("AnswerId");
         String answerText = (String) getIntent().getSerializableExtra("AnswerText");
-        String userId = getIntent().getStringExtra("QuorabayUserId");
+
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName() , Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("QuorabayUserId" , "31b6aa8d-a1f8-4845-a9f4-046f326064d7");
+
+
+        //String userId = getIntent().getStringExtra("QuorabayUserId");
         Log.d("ABC", "onCreate: " + answerId);
         List<CommentData> commentsList = new ArrayList<>();
         Call<List<CommentData>> responseBodyCall = iPostAPI.getCommentByAnswerId(answerId);

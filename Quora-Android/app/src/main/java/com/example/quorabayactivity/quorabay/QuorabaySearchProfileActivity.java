@@ -44,7 +44,7 @@ public class QuorabaySearchProfileActivity extends AppCompatActivity {
         //String UserId = getIntent().getStringExtra("QuorabayUserId");
         SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String UserId = sharedPreferences.getString("QuorabayUserId" , "DEFAULT");
+        String UserId = sharedPreferences.getString("QuorabayUserId" , "31b6aa8d-a1f8-4845-a9f4-046f326064d7");
 
         UserSearch userSearch = gson.fromJson(user, UserSearch.class);
         profileImage = findViewById(R.id.quorabay_userSearch_profileImage);
