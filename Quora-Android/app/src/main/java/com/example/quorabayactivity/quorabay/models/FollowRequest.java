@@ -4,9 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class FollowRequest {
 
-    @SerializedName("id")
-    private String id;
-
     @SerializedName("userId")
     private String userId;
 
@@ -16,18 +13,9 @@ public class FollowRequest {
     public FollowRequest() {
     }
 
-    public FollowRequest(String id, String userId, String followerId) {
-        this.id = id;
+    public FollowRequest(String userId, String followerId) {
         this.userId = userId;
         this.followerId = followerId;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getUserId() {
@@ -49,8 +37,7 @@ public class FollowRequest {
     @Override
     public String toString() {
         return "FollowRequest{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
+                "userId='" + userId + '\'' +
                 ", followerId='" + followerId + '\'' +
                 '}';
     }

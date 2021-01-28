@@ -1,6 +1,7 @@
 package com.example.quorabayactivity.quorabay;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.quorabayactivity.R;
 import com.example.quorabayactivity.quorabay.builders.RetrofitBuilder;
+import com.example.quorabayactivity.quorabay.builders.RetrofitFollower;
 import com.example.quorabayactivity.quorabay.dto.ResponseMessage;
 import com.example.quorabayactivity.quorabay.networks.IPostAPI;
 
@@ -31,6 +33,7 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
     Button follow;
     String imageUrl;
     TextView logout;
+    TextView level;
 //    private Uri imageUri;
 //    private FirebaseStorage firebaseStorage;
 //    private StorageReference storageReference;
@@ -70,6 +73,7 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
                 Toast.makeText(QuorabayUserProfileActivity.this, "Fail Number Of Posts", Toast.LENGTH_SHORT).show();
+                Log.e("FailNumberOfPosts", "onFailure: " + t.getMessage() );
             }
         });
 
@@ -89,19 +93,64 @@ public class QuorabayUserProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseMessage> call, Throwable t) {
                 Toast.makeText(QuorabayUserProfileActivity.this, "failFollower", Toast.LENGTH_SHORT).show();
+                Log.e("FailNumberOfFollower", "onFailure: " + t.getMessage() );
             }
         });
+
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+
 
         logout = findViewById(R.id.tv_quorabay_user_profile_logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent gotoLogout = new Intent(QuorabayUserProfileActivity.this , LoginActivity.class);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("QuorabayUserId");
+                editor.remove("QuorabayUserName");
+                editor.remove("QuorabayUserImage");
+                editor.apply();
+                editor.commit();
                 gotoLogout.putExtra("channelId" , 1);
                 gotoLogout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(gotoLogout);
             }
         });
+
+        Retrofit retrofit1 = RetrofitFollower.getInstance();
+        IPostAPI iPostAPI1 = retrofit1.create(IPostAPI.class);
+
+        level = findViewById(R.id.tv_quorabay_userPorfile_setLevel);
+
+//        Call<String> levelApiCall = iPostAPI1.findRanking(userId);
+//        levelApiCall.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                if (response.body() != null){
+//                    Log.d("level", "onResponse: " + response.body());
+//                    level.setText(response.body());
+//                }else{
+//                    level.setText("beginner");
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Log.e("LevelFail", "onFailure: " + t.getMessage() );
+//            }
+//        });
+         Call<ResponseMessage> apiCall = iPostAPI1.findRanking(userId);
+         apiCall.enqueue(new Callback<ResponseMessage>() {
+             @Override
+             public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                 Log.d("level", "onResponse: " + response.body().getMessage());
+                 level.setText(response.body().getMessage());
+             }
+
+             @Override
+             public void onFailure(Call<ResponseMessage> call, Throwable t) {
+                 Log.d("LevelFail", "onFailure: " + t.getMessage());
+             }
+         });
 //        firebaseStorage = FirebaseStorage.getInstance();
 //        storageReference = firebaseStorage.getReference();
 //        profileImage.setOnClickListener(new View.OnClickListener() {

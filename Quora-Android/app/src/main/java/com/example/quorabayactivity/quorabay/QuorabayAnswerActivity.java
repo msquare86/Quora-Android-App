@@ -1,5 +1,7 @@
 package com.example.quorabayactivity.quorabay;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +37,9 @@ public class QuorabayAnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_answer);
 
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName() , Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("QuorabayUserId" , "QuorabayUser");
+
         List<Answers> answersList  = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_answer_recycler_view);
         Retrofit retrofit = RetrofitBuilder.getInstance();
@@ -52,7 +57,7 @@ public class QuorabayAnswerActivity extends AppCompatActivity {
                 }
 
                 Log.d("Question page", "onResponse: " + answersList.size());
-                QuorabayAnswersRecylerViewAdapter recyclerViewAdapter = new QuorabayAnswersRecylerViewAdapter(answersList, QuorabayAnswerActivity.this, questionId, questionText);
+                QuorabayAnswersRecylerViewAdapter recyclerViewAdapter = new QuorabayAnswersRecylerViewAdapter(answersList, QuorabayAnswerActivity.this, questionId, questionText , userId);
                 recyclerView.setLayoutManager(new LinearLayoutManager(QuorabayAnswerActivity.this));
                 recyclerView.setAdapter(recyclerViewAdapter);
             }
@@ -67,7 +72,7 @@ public class QuorabayAnswerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText editText = findViewById(R.id.et_quora_adding_answer);
                 PostAnswer postAnswer1 = new PostAnswer();
-                postAnswer1.setUserId("u1");
+                postAnswer1.setUserId(userId);
                 postAnswer1.setContent(editText.getText().toString());
                 postAnswer1.setQuestionId(questionId);
                 Call<ResponseBody> postAnswerApiCall = iPostAPI.createAnswer(postAnswer1);

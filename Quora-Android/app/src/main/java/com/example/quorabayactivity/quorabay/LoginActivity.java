@@ -155,16 +155,28 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                     @Override
                                                                     public void onFailure(Call<String> call, Throwable t) {
-                                                                        Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(LoginActivity.this, "No User Save", Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 });
-                                                                Intent gotoHomePage = new Intent(LoginActivity.this, QuorabayHomeActivity.class);
-
-                                                                gotoHomePage.putExtra("QuorabayUserId", finalDecodedJWTEntity.getUserId());
-                                                                gotoHomePage.putExtra("QuorabayUserName", finalDecodedJWTEntity.getUsername());
-                                                                gotoHomePage.putExtra("QuorabayUserEmail", finalDecodedJWTEntity.getEmail());
-                                                                gotoHomePage.putExtra("QuorabayUserImage", imageUrl);
-                                                                startActivity(gotoHomePage);
+                                                                if (finalDecodedJWTEntity.getType() != 3) {
+                                                                    Intent gotoHomePage = new Intent(LoginActivity.this, QuorabayHomeActivity.class);
+                                                                    finish();
+                                                                    gotoHomePage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                                    gotoHomePage.putExtra("QuorabayUserId", finalDecodedJWTEntity.getUserId());
+                                                                    gotoHomePage.putExtra("QuorabayUserName", finalDecodedJWTEntity.getUsername());
+                                                                    gotoHomePage.putExtra("QuorabayUserEmail", finalDecodedJWTEntity.getEmail());
+                                                                    gotoHomePage.putExtra("QuorabayUserImage", imageUrl);
+                                                                    startActivity(gotoHomePage);
+                                                                }else{
+                                                                    Intent gotoOwnerPage = new Intent(LoginActivity.this , QuorabayOwnerHomeActivity.class);
+                                                                    finish();
+                                                                    gotoOwnerPage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                                    gotoOwnerPage.putExtra("QuorabayOwnerId", finalDecodedJWTEntity.getUserId());
+                                                                    gotoOwnerPage.putExtra("QuorabayOwnerName", finalDecodedJWTEntity.getUsername());
+                                                                    gotoOwnerPage.putExtra("QuorabayOwnerEmail", finalDecodedJWTEntity.getEmail());
+                                                                    gotoOwnerPage.putExtra("QuorabayOwnerImage", imageUrl);
+                                                                    startActivity(gotoOwnerPage);
+                                                                }
                                                             }
 
                                                             @Override

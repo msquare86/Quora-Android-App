@@ -24,7 +24,6 @@
     <string name="fcm_message">FCM Message</string>
 
     <string-array name="topics">
-        <item>select topic</item>
         <item>Technology</item>
         <item>Food</item>
         <item>Music</item>

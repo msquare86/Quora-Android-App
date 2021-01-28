@@ -36,14 +36,16 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
     private final Context mContext;
     private final String questionId;
     private final String questionText;
+    private final String userId;
     private String userName = "quorabayUser";
     private int like = 0 , dislike = 0;
 
-    public QuorabayAnswersRecylerViewAdapter(List<Answers> mAnswersList, Context mContext, String questionId, String questionText) {
+    public QuorabayAnswersRecylerViewAdapter(List<Answers> mAnswersList, Context mContext, String questionId, String questionText, String userId) {
         this.mAnswersList = mAnswersList;
         this.mContext = mContext;
         this.questionId = questionId;
         this.questionText = questionText;
+        this.userId = userId;
     }
 
     @NonNull
@@ -60,13 +62,10 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
         //final int[] dislike = {0};
         Retrofit retrofit = RetrofitBuilder.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
-
+       // SharedPreferences sharedPreferences = getSharedPreferences(mContext.getPackageName() , Context.MODE_PRIVATE);
         Retrofit retrofit1 = RetrofitFollower.getInstance();
         IPostAPI iPostAPI1 = retrofit1.create(IPostAPI.class);
-
-
         Answers answers = mAnswersList.get(position);
-
 
         // TODO: 27/01/21 GetUsername
         Call<ResponseMessage> getUserNameApiCall = iPostAPI1.getUserNameByUserId(answers.getUserId());
@@ -91,12 +90,14 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
         holder.tv_quorabay_answer_questionText.setText(questionText);
 
         holder.like.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
                 PostReaction postReaction = new PostReaction();
                 postReaction.setAnswerId(answers.getAnswerId());
                 postReaction.setReactionStatus(1);
-                postReaction.setUserId(answers.getUserId());
+                postReaction.setUserId(userId);
 
                 Call<ResponseBody> responseBodyCall = iPostAPI.reactOnLikeDislike(postReaction);
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -119,8 +120,13 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
                 PostReaction postReaction = new PostReaction();
                 postReaction.setAnswerId(answers.getAnswerId());
                 postReaction.setReactionStatus(-1);
-                postReaction.setUserId(answers.getUserId());
+                postReaction.setUserId(userId);
                 Call<ResponseBody> responseBodyCall = iPostAPI.reactOnLikeDislike(postReaction);
+
+
+//                AnswerDto answerDto = new AnswerDto();
+//                answerDto.setAnswers(answers);
+
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -162,9 +168,9 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (response.body() != null) {
-                    like = response.body().intValue();
+                    //like = response.body().intValue();
                     Log.d("Like Cnt", "onResponse: " + like);
-                    holder.tv_quorabay_answer_likes.setText(String.valueOf(like));
+                    holder.tv_quorabay_answer_likes.setText(String.valueOf(response.body().intValue()));
                 }
             }
 
@@ -179,9 +185,9 @@ public class QuorabayAnswersRecylerViewAdapter extends RecyclerView.Adapter<Quor
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (response.body() != null) {
-                    dislike = response.body().intValue();
+                    //dislike = response.body().intValue();
                     Log.d("Dislike Cnt", "onResponse: " + response.body().intValue());
-                    holder.tv_quorabay_answer_dislikes.setText(String.valueOf(dislike));
+                    holder.tv_quorabay_answer_dislikes.setText(String.valueOf(response.body().intValue()));
                 }
             }
             @Override

@@ -70,11 +70,8 @@ public class QuorabayPostQuestionActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position > 0) {
-                    categoryName = categories[position - 1];
-                }else{
-                    Toast.makeText(QuorabayPostQuestionActivity.this, "Select Valid Field", Toast.LENGTH_SHORT).show();
-                }
+                    categoryName = categories[position];
+                    //Toast.makeText(QuorabayPostQuestionActivity.this, "Select Valid Field", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -93,53 +90,37 @@ public class QuorabayPostQuestionActivity extends AppCompatActivity {
 
             String userId = getIntent().getStringExtra("QuorabayUserId");
             EditText editText = findViewById(R.id.et_quorabay_postquestion_askQuestion);
-            Log.d("post userId", "onCreate: " + userId);
-            Questions questions = new Questions();
-            Category category = new Category();
-            category.setCategoryId(hashMap.get(categoryName));
-            category.setCategoryName(categoryName);
-            questions.setCategory(category);
-            questions.setUserId(userId);
-            questions.setQuestionText(editText.getText().toString());
-            Call<ResponseBody> responseBodyCall = iPostAPI.createQuestion(questions);
-            responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    Toast.makeText(QuorabayPostQuestionActivity.this , "Question Successfully Added", Toast.LENGTH_LONG).show();
-//                    Retrofit retrofit1 = RetrofitData.getInstance();
-//                    IPostAPI iPostAPI1 = retrofit1.create(IPostAPI.class);
-//                    DataanalyticsPost dataanalyticsPost = new DataanalyticsPost();
-//                    dataanalyticsPost.setAction("post");
-//                    dataanalyticsPost.setCategoryName(categoryName);
-//                    dataanalyticsPost.setChannelId(1);
-//                    dataanalyticsPost.setType("text");
-//                    dataanalyticsPost.setPostId("1");
-//                    Call<ResponseBody> postAnalyticcall = iPostAPI1.postToAnalytics(dataanalyticsPost);
-//                    postAnalyticcall.enqueue(new Callback<ResponseBody>() {
-//                        @Override
-//                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                            Log.d("Data", "onResponse: nothing");
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                            Log.d("Data Fail", "onFailure: " + t);
-//                        }
-//                    });
-                    Intent intent = new Intent(QuorabayPostQuestionActivity.this,QuorabayHomeActivity.class);
-                    startActivity(intent);
-                }
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Toast.makeText(QuorabayPostQuestionActivity.this, "Failed" + t, Toast.LENGTH_LONG).show();
-                    Log.d("Manan" , "T");
-                }
-            });
+            if (editText.getText().toString().equals("")){
+                Toast.makeText(this, "Please Write Question", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Log.d("post userId", "onCreate: " + userId);
+                Questions questions = new Questions();
+                Category category = new Category();
+                category.setCategoryId(hashMap.get(categoryName));
+                category.setCategoryName(categoryName);
+                questions.setCategory(category);
+                questions.setUserId(userId);
+                questions.setQuestionText(editText.getText().toString());
+                Call<ResponseBody> responseBodyCall = iPostAPI.createQuestion(questions);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Toast.makeText(QuorabayPostQuestionActivity.this, "Question Successfully Added", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(QuorabayPostQuestionActivity.this, QuorabayHomeActivity.class);
+                        startActivity(intent);
+                    }
 
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(QuorabayPostQuestionActivity.this, "Failed" + t, Toast.LENGTH_LONG).show();
+                        Log.d("Manan", "T");
+                    }
+                });
+            }
         });
-
-}
+    }
     String getQuestionText()
     {
         return questionBox.getText().toString().trim();

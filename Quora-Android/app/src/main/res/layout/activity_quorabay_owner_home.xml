@@ -27,8 +27,8 @@
                 android:id="@+id/quorabay_owner_search" />
         </androidx.appcompat.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/tv_quorabay_owner_moderatorlist"
+        <Button
+            android:id="@+id/btn_quorabay_owner_moderatorlist"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
@@ -38,8 +38,8 @@
             android:text="Moderator List"
             />
 
-        <TextView
-            android:id="@+id/textView2"
+        <Button
+            android:id="@+id/btn_quorabay_owner_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -47,10 +47,19 @@
             android:backgroundTint="@color/quorabay_dark"
             android:layout_marginRight="40dp"
             android:text="Profile" />
+        <Button
+            android:id="@+id/btn_quorabay_owner_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="40dp"
+            android:backgroundTint="@color/quorabay_dark"
+            android:layout_marginRight="40dp"
+            android:text="Logout" />
 
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/quora_nav_view"
+        android:id="@+id/quora_nav_owner_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:headerLayout="@layout/quorabay_nav_header"

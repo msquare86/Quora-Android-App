@@ -1,6 +1,6 @@
 package com.example.quorabayactivity.quorabay;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,10 +27,9 @@ import retrofit2.Retrofit;
 public class QuorabaySearchProfileActivity extends AppCompatActivity {
 
     ImageView profileImage;
-    TextView userName, email;
+    TextView userName;
     Button follow;
-    String imageUrl;
-    TextView logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +41,11 @@ public class QuorabaySearchProfileActivity extends AppCompatActivity {
         String user = (String) getIntent().getSerializableExtra("UserSearch");
         Gson gson = new Gson();
 
-        String UserId = getIntent().getStringExtra("QuorabayUserId");
+        //String UserId = getIntent().getStringExtra("QuorabayUserId");
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String UserId = sharedPreferences.getString("QuorabayUserId" , "DEFAULT");
+
         UserSearch userSearch = gson.fromJson(user, UserSearch.class);
         profileImage = findViewById(R.id.quorabay_userSearch_profileImage);
         Glide.with(this)
@@ -55,15 +58,17 @@ public class QuorabaySearchProfileActivity extends AppCompatActivity {
         userName.setText(userSearch.getUserName());
 
         FollowRequest followRequest = new FollowRequest();
-        followRequest.setUserId(UserId);
-        followRequest.setFollowerId(userSearch.getUserId());
+        followRequest.setUserId(userSearch.getUserId());
+        followRequest.setFollowerId(UserId);
+        Log.d("OPS", "onCreate: " + userSearch.getUserId() + UserId);
         follow = findViewById(R.id.btn_quorabay_user_search_follow);
+
         Call<Boolean> followRequestCall = iPostAPI.checkFollowing(followRequest);
         followRequestCall.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.body() != null){
-                    if (response.body()){
+                    if (response.body().booleanValue()){
                         follow.setEnabled(false);
                     }else{
                         follow.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +83,7 @@ public class QuorabaySearchProfileActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onFailure(Call<FollowRequest> call, Throwable t) {
-                                        Log.d("fail", "onFailure: " + t);
+                                        Log.d("BOOLEAN", "onFailure: " + t);
                                     }
                                 });
                             }
@@ -90,17 +95,6 @@ public class QuorabaySearchProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
                 Log.e("fail", "onFailure: " + t );
-            }
-        });
-
-        logout = findViewById(R.id.tv_quorabay_user_search_logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent gotoLoginPage = new Intent(QuorabaySearchProfileActivity.this , LoginActivity.class);
-                gotoLoginPage.putExtra("channelId" , 1);
-                gotoLoginPage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(gotoLoginPage);
             }
         });
     }

@@ -51,29 +51,29 @@ public interface IPostAPI {
 
 // For Question ====================================================================================
 
-        @GET("quora/question/findall")
-        Call<List<Questions>> getQuestions();
+    @GET("quora/question/findall")
+    Call<List<Questions>> getQuestions();
 
-        @POST("quora/question/")
-        Call<ResponseBody> createQuestion(@Body Questions questions);
+    @POST("quora/question/")
+    Call<ResponseBody> createQuestion(@Body Questions questions);
 
-        @GET("quora/question/{questionId}")
-        Call<Questions> getQuestionById(@Path("questionId") String questionId);
+    @GET("quora/question/{questionId}")
+    Call<Questions> getQuestionById(@Path("questionId") String questionId);
 
-        @GET("quora/question/user/{userId}")
-        Call<List<Questions>> getQuestionByUserId (@Path("userId") String userId);
+    @GET("quora/question/user/{userId}")
+    Call<List<Questions>> getQuestionByUserId (@Path("userId") String userId);
 
-        @GET("quora/question/page/{corporateId}")
-        Call<List<Questions>> getQuestionByCorporateId (@Path("corporateId") String corporateId);
+    @GET("quora/question/page/{corporateId}")
+    Call<List<Questions>> getQuestionByCorporateId (@Path("corporateId") String corporateId);
 
-        @GET("quora/question/count/{userId}")
-        Call<Integer> getQuestionCountByUserId (@Path("userId") String userId);
+    @GET("quora/question/count/{userId}")
+    Call<Integer> getQuestionCountByUserId (@Path("userId") String userId);
 
-        @GET("quora/question/category/{categoryId}")
-        Call<List<Questions>> getQuestionByCategoryId(@Path("categoryId") String categoryId);
+    @GET("quora/question/category/{categoryId}")
+    Call<List<Questions>> getQuestionByCategoryId(@Path("categoryId") String categoryId);
 
-        @GET("quora/question/categoryname/{categoryId}")
-        Call<String> getCategoryNameByCategoryId(@Path("categoryId") String categoryId);
+    @GET("quora/question/categoryname/{categoryId}")
+    Call<String> getCategoryNameByCategoryId(@Path("categoryId") String categoryId);
  //=================================================================================================
 
 // For Answer ====================================================================================
@@ -132,7 +132,8 @@ public interface IPostAPI {
 
 //For Ranking =================================================================================================
 
-
+    @GET("quora/profile/user/userranking/{userId}")
+    Call<ResponseMessage> findRanking(@Path("userId") String userId);
 
 //=================================================================================================
 
@@ -154,20 +155,20 @@ public interface IPostAPI {
 
 // For Followers =================================================================================================
 
-      @GET("quora/follower/{userId}")
-      Call<List<UserDetails>> getFollowersByUserId (@Path("userId") String userId);
+    @GET("quora/follower/{userId}")
+    Call<List<UserDetails>> getFollowersByUserId (@Path("userId") String userId);
 
-      @GET("quora/profile/pending/{userId}")
-      Call<List<UserProfileData>> getFollowRequestByUserId(@Path("userId") String userId);
+    @GET("quora/profile/pending/{userId}")
+    Call<List<UserProfileData>> getFollowRequestByUserId(@Path("userId") String userId);
 
-      @POST("quora/profile/approve")
-      Call<FollowRequest> approveFollowRequest(@Body FollowRequest followRequest);
+    @POST("quora/profile/approve")
+    Call<FollowRequest> approveFollowRequest(@Body FollowRequest followRequest);
 
-      @POST("quora/follower/addfollower")
-      Call<FollowRequest> addFollower(@Body FollowRequest followRequest);
+    @POST("quora/follower/addfollower")
+    Call<FollowRequest> addFollower(@Body FollowRequest followRequest);
 
-      @POST("quora/follower/checkfollowing")
-      Call<Boolean> checkFollowing(@Body FollowRequest followRequest);
+    @POST("quora/follower/checkfollowing")
+    Call<Boolean> checkFollowing(@Body FollowRequest followRequest);
 //=================================================================================================
 
 // For User=================================================================================================
@@ -178,6 +179,7 @@ public interface IPostAPI {
     @POST("quora/profile/user")
     Call<String> saveUser(@Body UserDetails userDetails);
 
+    // TODO: 28/01/21 check not hitted 
     @GET("quora/question/user/{userId}")
     Call<List<Questions>> getAllQuestionsByUserId(@Path("userId") String userId);
 

@@ -55,7 +55,8 @@ public class  QuorabayUserFollowRequestRecylerViewAdapter extends RecyclerView.A
 
         UserProfileData userSearch = mUserFollowerRequestList.get(position);
         holder.tv_quorabay_request_accept_decline_userName.setText(userSearch.getUserName());
-        Glide.with(holder.iv_quorabay_request_accept_decline_image.getContext())
+        Log.d("PICS", "onBindViewHolder: " + userSearch.getImageUrl());
+        Glide.with(mContext)
                 .load(userSearch.getImageUrl())
                 .placeholder(R.drawable.quorabay_profile_image)
                 .into(holder.iv_quorabay_request_accept_decline_image);
@@ -66,7 +67,7 @@ public class  QuorabayUserFollowRequestRecylerViewAdapter extends RecyclerView.A
                 FollowRequest followRequest = new FollowRequest();
                 followRequest.setUserId(userSearch.getUserId());
                 followRequest.setFollowerId(userSearch.getFollowerId());
-
+                Log.d("WX", "onClick: " + userSearch.getUserId() + userSearch.getFollowerId());
                 Call<FollowRequest> followRequestCall = iPostAPI.approveFollowRequest(followRequest);
                 followRequestCall.enqueue(new Callback<FollowRequest>() {
                     @Override
@@ -76,7 +77,7 @@ public class  QuorabayUserFollowRequestRecylerViewAdapter extends RecyclerView.A
 
                     @Override
                     public void onFailure(Call<FollowRequest> call, Throwable t) {
-                        Log.e("fail approve", "onFailure: " + t );
+                        Log.e("OOO", "onFailure: " + t );
                     }
                 });
             }

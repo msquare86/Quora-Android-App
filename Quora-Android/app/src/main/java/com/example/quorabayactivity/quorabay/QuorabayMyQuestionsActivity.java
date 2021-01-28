@@ -1,5 +1,6 @@
 package com.example.quorabayactivity.quorabay;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -28,14 +29,16 @@ public class QuorabayMyQuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_my_questions);
 
-        String userId = getIntent().getStringExtra("QuorbayUserId");
-        String userName = getIntent().getStringExtra("QuorbayUserName");
+        //String userId = getIntent().getStringExtra("QuorbayUserId");
+        //String userName = getIntent().getStringExtra("QuorbayUserName");
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName() , MODE_PRIVATE);
 
+        String userId = sharedPreferences.getString("QuorabayUserId" , "quorabayUserId");
         List<Questions> questionsList = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_my_questions_recycler_view);
         Retrofit retrofit = RetrofitBuilder.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
-
+        Log.d("YYY", "onCreate: " + userId);
         Call<List<Questions>> questionsApiCall = iPostAPI.getAllQuestionsByUserId(userId);
         questionsApiCall.enqueue(new Callback<List<Questions>>() {
             @Override

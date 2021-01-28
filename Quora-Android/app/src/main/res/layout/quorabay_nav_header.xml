@@ -18,27 +18,27 @@
         android:textStyle="bold"
         android:textColor="@color/quorabay_text_color"/>
 
-    <ImageView
-        android:id="@+id/iv_quorabay_profile_image"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@drawable/quorabay_profile_image"
-        tools:ignore="MissingClass" />
+<!--    <ImageView-->
+<!--        android:id="@+id/iv_quorabay_profile_image"-->
+<!--        android:layout_width="90dp"-->
+<!--        android:layout_height="90dp"-->
+<!--        android:src="@drawable/quorabay_profile_image"-->
+<!--        tools:ignore="MissingClass" />-->
 
-    <TextView
-        android:id="@+id/quorabay_nav_header_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Username"
-        android:textColor="@color/quorabay_text_color"
-        android:textSize="18sp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/quorabay_nav_header_username"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Username"-->
+<!--        android:textColor="@color/quorabay_text_color"-->
+<!--        android:textSize="18sp"/>-->
 
-    <TextView
-        android:id="@+id/quorabay_nav_header_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="email"
-        android:textColor="@color/quorabay_text_color"
-        android:textSize="18sp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/quorabay_nav_header_email"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="email"-->
+<!--        android:textColor="@color/quorabay_text_color"-->
+<!--        android:textSize="18sp"/>-->
 
 </LinearLayout>

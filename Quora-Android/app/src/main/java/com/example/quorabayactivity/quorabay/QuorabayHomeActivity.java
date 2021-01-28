@@ -2,12 +2,12 @@ package com.example.quorabayactivity.quorabay;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -53,8 +53,8 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
         toolbar =  findViewById(R.id.quora_home_toolbar);
 
 
-        TextView tv_email = findViewById(R.id.quorabay_nav_header_email);
-        TextView quorabay_nav_header_username = findViewById(R.id.quorabay_nav_header_username);
+        //TextView tv_email = findViewById(R.id.quorabay_nav_header_email);
+        //TextView quorabay_nav_header_username = findViewById(R.id.quorabay_nav_header_username);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("QuoraBay");
         NavigationView navigationView = findViewById(R.id.quora_nav_view);
@@ -68,6 +68,14 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
         userName = getIntent().getStringExtra("QuorabayUserName");
         userEmail = getIntent().getStringExtra("QuorabayUserEmail");
         userImage = getIntent().getStringExtra("QuorabayUserImage");
+
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("QuorabayUserId" , userId);
+        editor.putString("QuorabayUserName" , userName);
+        editor.putString("QuorabayUserEmail" , userEmail);
+        editor.apply();
+        editor.commit();
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,11 +170,21 @@ public class QuorabayHomeActivity extends AppCompatActivity implements Navigatio
 
             case R.id.quorabay_nav_follow_request:
                 Intent followRequest = new Intent(QuorabayHomeActivity.this , QuorabayUserFollowRequestActivity.class);
+                followRequest.putExtra("QuorabayUserId" , userId);
+                followRequest.putExtra("QuorabayUserName" , userName);
+                followRequest.putExtra("QuorbayUserImage" , userImage);
                 startActivity(followRequest);
                 break;
 
             case R.id.quorabay_nav_logout:
                 Intent logout = new Intent(QuorabayHomeActivity.this , LoginActivity.class);
+                SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("QuorabayUserId");
+                editor.remove("QuorabayUserName");
+                editor.remove("QuorabayUserImage");
+                editor.apply();
+                editor.commit();
                 logout.putExtra("channelId" , 1);
                 logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(logout);

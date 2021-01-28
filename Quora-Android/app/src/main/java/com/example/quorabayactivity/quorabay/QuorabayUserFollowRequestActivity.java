@@ -29,6 +29,8 @@ public class QuorabayUserFollowRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_user_follow_request);
 
+        String userId = getIntent().getStringExtra("QuorabayUserId");
+        Log.d("MNOP", "onCreate: " + userId);
         FollowRequest followRequest  = new FollowRequest();
         RecyclerView recyclerView = findViewById(R.id.row_quorabay_userfollow_request);
         Retrofit retrofit = RetrofitFollower.getInstance();
@@ -36,7 +38,7 @@ public class QuorabayUserFollowRequestActivity extends AppCompatActivity {
 
         List<UserProfileData> userProfileDataList = new ArrayList<>();
 
-        Call<List<UserProfileData>> userFollowRequestCall = iPostAPI.getFollowRequestByUserId("u4");
+        Call<List<UserProfileData>> userFollowRequestCall = iPostAPI.getFollowRequestByUserId(userId);
         userFollowRequestCall.enqueue(new Callback<List<UserProfileData>>() {
             @Override
             public void onResponse(Call<List<UserProfileData>> call, Response<List<UserProfileData>> response) {
@@ -53,7 +55,7 @@ public class QuorabayUserFollowRequestActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<List<UserProfileData>> call, Throwable t) {
-                Log.e("fail follow", "onFailure: " + t );
+                Log.e("XYZ", "onFailure: " + t );
             }
         });
     }

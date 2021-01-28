@@ -13,12 +13,15 @@
         android:background="@color/quorabay_dark"
         android:elevation="4dp"
         tools:ignore="MissingConstraints" />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/row_quorabay_my_questions_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/quorabay_answer_bottom"
-        android:id="@+id/row_quorabay_my_questions_recycler_view"
         android:layout_below="@id/quorabay_home_answer_toolbar"
+        android:layout_marginTop="70dp"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

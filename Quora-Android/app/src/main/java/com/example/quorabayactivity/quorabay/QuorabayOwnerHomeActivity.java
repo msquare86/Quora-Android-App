@@ -3,29 +3,30 @@ package com.example.quorabayactivity.quorabay;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.quorabayactivity.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class QuorabayOwnerHomeActivity extends AppCompatActivity  {
-    TextView moderatorlist;
+public class QuorabayOwnerHomeActivity extends AppCompatActivity   {
+    Button moderatorlist;
+    Button profile;
+    Button logout;
     SearchView searchView;
-    private DrawerLayout quorabay_drawer_layout;
-    private Toolbar toolbar;
 
-    private FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quorabay_owner_home);
-        moderatorlist = findViewById(R.id.tv_quorabay_owner_moderatorlist);
 
+        String ownerId = getIntent().getStringExtra("QuorabayOwnerId");
+        String ownerName = getIntent().getStringExtra("QuorabayOwnerName");
+        String ownerEmail = getIntent().getStringExtra("QuorabayOwnerEmail");
+        String ownerImage = getIntent().getStringExtra("QuorabayOwnerImage");
+
+        moderatorlist = findViewById(R.id.btn_quorabay_owner_moderatorlist);
         moderatorlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,5 +43,31 @@ public class QuorabayOwnerHomeActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
+
+        profile = findViewById(R.id.btn_quorabay_owner_profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuorabayOwnerHomeActivity.this , QuorabayUserProfileActivity.class);
+                intent.putExtra("QuorabayUserId" , ownerId);
+                intent.putExtra("QuorabayUserName" , ownerName);
+                intent.putExtra("QuorabayUserImage" , ownerImage);
+                intent.putExtra("QuorabayUserEmail" , ownerEmail);
+                startActivity(intent);
+            }
+        });
+
+        logout = findViewById(R.id.btn_quorabay_owner_logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent logout = new Intent(QuorabayOwnerHomeActivity.this , LoginActivity.class);
+                finish();
+                logout.putExtra("channelId" , 1);
+                logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(logout);
+            }
+        });
     }
+
 }

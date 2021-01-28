@@ -279,8 +279,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                                                         else if (response.body().getCode() == 0){
                                                                             SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
                                                                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                                                                            editor.putString("quorabayuserId", decodedJWTEntity.getUserId());
-                                                                            editor.putString("quorabayuserName" , decodedJWTEntity.getUsername());
+                                                                            editor.putString("QuorabayuserId", decodedJWTEntity.getUserId());
+                                                                            editor.putString("QuorabayuserName" , decodedJWTEntity.getUsername());
                                                                             editor.apply();
                                                                             editor.commit();
 
@@ -311,6 +311,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                                                                 }
                                                                             });
                                                                             Intent gotoHomePage = new Intent(RegistrationActivity.this , QuorabayHomeActivity.class);
+                                                                            finish();
                                                                             gotoHomePage.putExtra("QuorabayUserId" , decodedJWTEntity.getUserId());
                                                                             gotoHomePage.putExtra("QuorabayUserName" , decodedJWTEntity.getUsername());
                                                                             gotoHomePage.putExtra("QuorabayUserEmail" , decodedJWTEntity.getEmail());

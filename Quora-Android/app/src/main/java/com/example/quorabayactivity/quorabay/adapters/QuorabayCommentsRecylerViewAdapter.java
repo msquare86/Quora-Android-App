@@ -51,7 +51,6 @@ public class QuorabayCommentsRecylerViewAdapter extends RecyclerView.Adapter<Quo
         Retrofit retrofit = RetrofitFollower.getInstance();
         IPostAPI iPostAPI = retrofit.create(IPostAPI.class);
 
-        // TODO: 27/01/21 GetUserName
         Call<ResponseMessage> getUserNameApiCall = iPostAPI.getUserNameByUserId(comments.getUserId());
         getUserNameApiCall.enqueue(new Callback<ResponseMessage>() {
             @Override
@@ -67,8 +66,10 @@ public class QuorabayCommentsRecylerViewAdapter extends RecyclerView.Adapter<Quo
                 Log.e("fail", "onFailure: " + t ) ;
             }
         });
+        //java.util.Date date = new java.util.Date();
+        //System.out.println(date);
         Log.d("username", "onBindViewHolder: " + userName);
-        holder.tv_quorabay_comment_date.setText("2021-01-27");
+        holder.tv_quorabay_comment_date.setText("2021-01-28");
         holder.tv_quorabay_commentor_comment.setText(comments.getCommentText());
         holder.tv_quorabay_commentor_username.setText(userName);
     }

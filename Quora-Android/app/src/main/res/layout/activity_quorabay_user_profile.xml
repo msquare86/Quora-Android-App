@@ -136,7 +136,32 @@
             android:textColor="@color/quorabay_light"
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Level"
+            android:id="@+id/tv_quorabay_userProfile_level"
+            android:textStyle="bold"
+            android:textColor="@color/quorabay_dark"
+            android:textSize="18dp"
+            android:layout_marginLeft="5dp"/>
 
+        <TextView
+            android:id="@+id/tv_quorabay_userPorfile_setLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:textColor="@color/quorabay_light"
+            android:textSize="18dp" />
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
